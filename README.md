@@ -1,6 +1,6 @@
 # Playful Sparkle - Google Sitemap for OpenCart 3
 
-The **Playful Sparkle - Google Sitemap** extension for OpenCart 3 is a user-friendly tool designed to enhance your online store's visibility in search engines. This extension simplifies the creation of XML sitemaps, which are crucial for helping search engines crawl and index your website effectively.
+The **Playful Sparkle - Google Sitemap** for OpenCart 3.x is a user-friendly tool designed to enhance your online store's visibility in search engines. This extension simplifies the creation of XML sitemaps, which are crucial for helping search engines crawl and index your website effectively.
 
 The extension streamlines the process of submitting relevant information to Google. It allows users to create focused sitemaps that highlight important pages while optimizing their site for multilingual audiences. With the extension, sitemap updates are automated, saving users time and ensuring that their information remains accurate and current.
 
@@ -17,15 +17,11 @@ The extension streamlines the process of submitting relevant information to Goog
 - **Multilingual Support**: Generate language-specific XML sitemaps, ensuring URLs, titles, and descriptions are displayed in the chosen language for submission to Google Search Console.
 - **Automatic Updates**: Automatically updates the sitemap with any changes to your store’s content.
 - **User-Friendly Setup**: Enjoy a seamless setup process through the OpenCart interface, designed for ease of use and efficiency.
-- **Full Compatibility**: Fully compatible with OpenCart v4.x, ensuring smooth integration with your existing setup.
+- **Full Compatibility**: Fully compatible with OpenCart 3.x, ensuring smooth integration with your existing setup.
 
 ---
 
 ## Installation Instructions
-
-### Important Note
-
-OpenCart requires all extension package filenames to end in the `.ocmod.zip` format for successful installation. The `ps_google_sitemap` extension adheres to this naming convention to ensure compatibility with OpenCart's installer.
 
 ### 1. Download the Extension
 Download the latest **Playful Sparkle - Google Sitemap** release from this repository.
@@ -51,7 +47,7 @@ Download the latest **Playful Sparkle - Google Sitemap** release from this repos
 
 ## Support & Feedback
 
-For support or any inquiries regarding the extensions, feel free to open an issue on this repository or reach out via email at `support@playfulsparkle.com`.
+For support or any inquiries regarding the extension, feel free to open an issue on this repository or reach out via email at [support@playfulsparkle.com](mailto:support@playfulsparkle.com).
 
 ---
 
