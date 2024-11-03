@@ -20,7 +20,7 @@ $_['text_faq']                = '<details><summary>How do I submit my sitemap to
 $_['text_contact']            = '<p>For further assistance, please reach out to our support team:</p><ul><li><strong>Contact:</strong> <a href="mailto:%s">%s</a></li><li><strong>Documentation:</strong> <a href="%s" target="_blank" rel="noopener noreferrer">User Documentation</a></li></ul>';
 
 // Tab
-$_['tab_general']             = 'General settings';
+$_['tab_general']             = 'General';
 $_['tab_help_and_support']    = 'Help &amp; Support';
 
 // Entry
