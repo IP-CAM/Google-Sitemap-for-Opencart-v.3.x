@@ -30,14 +30,12 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
 
         $languages = $this->model_localisation_language->getLanguages();
 
-        $language = $this->config->get('config_language');
         $language_id = (int) $this->config->get('config_language_id');
         $old_language_id = $language_id;
 
         if (isset($this->request->get['language']) && isset($languages[$this->request->get['language']])) {
             $cur_language = $languages[$this->request->get['language']];
 
-            $language = $cur_language['code'];
             $language_id = $cur_language['language_id'];
         }
 
@@ -66,7 +64,7 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
                 }
 
                 $this->xml->startElement('url');
-                $this->xml->writeElement('loc', $this->url->link('product/product', 'language=' . $language . '&product_id=' . $product['product_id']));
+                $this->xml->writeElement('loc', $this->url->link('product/product', 'product_id=' . $product['product_id']));
                 $this->xml->writeElement('lastmod', date('Y-m-d\TH:i:sP', strtotime($product['date_modified'])));
 
                 if (!empty($product['image'])) {
@@ -89,7 +87,7 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
         if ($this->config->get('feed_ps_google_sitemap_category')) {
             $this->load->model('catalog/category');
 
-            $this->getCategories($language, 0);
+            $this->getCategories(0);
         }
         #endregion
 
@@ -101,7 +99,7 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
 
             foreach ($manufacturers as $manufacturer) {
                 $this->xml->startElement('url');
-                $this->xml->writeElement('loc', $this->url->link('product/manufacturer', 'language=' . $language . '&manufacturer_id=' . $manufacturer['manufacturer_id']));
+                $this->xml->writeElement('loc', $this->url->link('product/manufacturer', 'manufacturer_id=' . $manufacturer['manufacturer_id']));
                 $this->xml->endElement();
             }
         }
@@ -119,7 +117,7 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
                 }
 
                 $this->xml->startElement('url');
-                $this->xml->writeElement('loc', $this->url->link('information/information', 'language=' . $language . '&information_id=' . $information['information_id']));
+                $this->xml->writeElement('loc', $this->url->link('information/information', 'information_id=' . $information['information_id']));
                 $this->xml->endElement();
             }
         }
@@ -144,12 +142,11 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
      * including its last modification date. The method calls itself recursively
      * to fetch subcategories.
      *
-     * @param string $language The language code for the URLs.
      * @param int $parent_id The ID of the parent category (default is 0 for top-level categories).
      *
      * @return void
      */
-    protected function getCategories($language, $parent_id)
+    protected function getCategories($parent_id)
     {
         $categories = $this->model_catalog_category->getCategories($parent_id);
 
@@ -159,11 +156,11 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
             }
 
             $this->xml->startElement('url');
-            $this->xml->writeElement('loc', $this->url->link('product/category', 'language=' . $language . '&path=' . $category['category_id']));
+            $this->xml->writeElement('loc', $this->url->link('product/category', 'path=' . $category['category_id']));
             $this->xml->writeElement('lastmod', date('Y-m-d\TH:i:sP', strtotime($category['date_modified'])));
             $this->xml->endElement();
 
-            $this->getCategories($language, $category['category_id']);
+            $this->getCategories($category['category_id']);
         }
     }
 }
