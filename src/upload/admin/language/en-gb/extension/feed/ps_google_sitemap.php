@@ -30,6 +30,8 @@ $_['entry_category']          = 'Category';
 $_['entry_manufacturer']      = 'Manufacturer';
 $_['entry_information']       = 'Information';
 $_['entry_data_feed_url']     = 'Data Feed Url';
+$_['entry_active_store']      = 'Active Store';
 
 // Error
 $_['error_permission']        = 'Warning: You do not have permission to modify Google Sitemap feed!';
+$_['error_store_id']          = 'Warning: Form does not contain store_id!';

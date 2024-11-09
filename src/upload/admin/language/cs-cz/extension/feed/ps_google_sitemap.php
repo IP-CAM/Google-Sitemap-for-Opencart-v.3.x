@@ -30,6 +30,8 @@ $_['entry_category']          = 'Kategorie';
 $_['entry_manufacturer']      = 'Výrobce';
 $_['entry_information']       = 'Informace';
 $_['entry_data_feed_url']     = 'URL datového kanálu';
+$_['entry_active_store']      = 'Aktivní obchod';
 
 // Error
 $_['error_permission']        = 'Upozornění: Nemáte oprávnění upravovat Google Sitemap feed!';
+$_['error_store_id']          = 'Upozornění: Formulář neobsahuje identifikátor obchodu!';

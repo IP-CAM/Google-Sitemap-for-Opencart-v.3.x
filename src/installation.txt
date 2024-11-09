@@ -16,6 +16,7 @@ Key Features
 * Automatic Updates: The sitemap updates automatically with any changes to your store’s content.
 * User-Friendly Setup: Simple installation through the OpenCart interface for easy use.
 * Full Compatibility: Works seamlessly with OpenCart 3.x.
+* Multi-Store Support: Customize product, category, manufacturer, and information pages to display per store, allowing for tailored sitemaps for each store within your multi-store setup.
 
 Installation Guide
 

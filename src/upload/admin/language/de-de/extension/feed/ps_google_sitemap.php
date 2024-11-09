@@ -30,6 +30,8 @@ $_['entry_category']          = 'Kategorie';
 $_['entry_manufacturer']      = 'Hersteller';
 $_['entry_information']       = 'Information';
 $_['entry_data_feed_url']     = 'Daten-Feed-Url';
+$_['entry_active_store']      = 'Aktiver Shop';
 
 // Error
 $_['error_permission']        = 'Warnung: Sie haben keine Berechtigung, den Google Sitemap-Feed zu ändern!';
+$_['error_store_id']          = 'Warnung: Das Formular enthält keine store_id!';

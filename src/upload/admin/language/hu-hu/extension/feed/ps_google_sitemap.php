@@ -30,6 +30,8 @@ $_['entry_category']          = 'Kategória';
 $_['entry_manufacturer']      = 'Gyártó';
 $_['entry_information']       = 'Információ';
 $_['entry_data_feed_url']     = 'Adatfeed URL';
+$_['entry_active_store']      = 'Aktív áruház';
 
 // Error
 $_['error_permission']        = 'Figyelmeztetés: Nincs jogosultsága a Google Oldaltérkép feed módosításához!';
+$_['error_store_id']          = 'Figyelem: A űrlap nem tartalmazza a áruház azonosítóját!';

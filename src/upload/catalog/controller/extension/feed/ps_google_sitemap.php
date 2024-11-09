@@ -26,6 +26,7 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
             return;
         }
 
+        $this->load->model('setting/setting');
         $this->load->model('localisation/language');
 
         $languages = $this->model_localisation_language->getLanguages();
@@ -41,7 +42,7 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
 
         $this->config->set('config_language_id', $language_id);
 
-
+        
         $this->xml = new \XMLWriter();
         $this->xml->openMemory();
         $this->xml->startDocument('1.0', 'UTF-8');
@@ -51,7 +52,7 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
         $this->xml->writeAttribute('xmlns:image', 'http://www.google.com/schemas/sitemap-image/1.1');
 
         #region Product
-        if ($this->config->get('feed_ps_google_sitemap_product')) {
+        if ($this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_product', $this->config->get('config_store_id'))) {
             $this->load->model('catalog/product');
             $this->load->model('tool/image');
 
@@ -84,7 +85,7 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
 
 
         #region Category
-        if ($this->config->get('feed_ps_google_sitemap_category')) {
+        if ($this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_category', $this->config->get('config_store_id'))) {
             $this->load->model('catalog/category');
 
             $this->getCategories(0);
@@ -92,7 +93,7 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
         #endregion
 
         #region Manufacturer
-        if ($this->config->get('feed_ps_google_sitemap_manufacturer')) {
+        if ($this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_manufacturer', $this->config->get('config_store_id'))) {
             $this->load->model('catalog/manufacturer');
 
             $manufacturers = $this->model_catalog_manufacturer->getManufacturers();
@@ -106,7 +107,7 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
         #endregion
 
         #region Information
-        if ($this->config->get('feed_ps_google_sitemap_information')) {
+        if ($this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_information', $this->config->get('config_store_id'))) {
             $this->load->model('catalog/information');
 
             $informations = $this->model_catalog_information->getInformations();

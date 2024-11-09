@@ -18,6 +18,7 @@ The extension streamlines the process of submitting relevant information to Goog
 - **Automatic Updates**: Automatically updates the sitemap with any changes to your store’s content.
 - **User-Friendly Setup**: Enjoy a seamless setup process through the OpenCart interface, designed for ease of use and efficiency.
 - **Full Compatibility**: Fully compatible with OpenCart 3.x, ensuring smooth integration with your existing setup.
+- **Multi-Store Support**: Customize product, category, manufacturer, and information pages to display per store, allowing for tailored sitemaps for each store within your multi-store setup.
 
 ---
 
