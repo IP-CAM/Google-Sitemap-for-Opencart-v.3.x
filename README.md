@@ -19,6 +19,18 @@ The extension streamlines the process of submitting relevant information to Goog
 - **User-Friendly Setup**: Enjoy a seamless setup process through the OpenCart interface, designed for ease of use and efficiency.
 - **Full Compatibility**: Fully compatible with OpenCart 3.x, ensuring smooth integration with your existing setup.
 - **Multi-Store Support**: Customize product, category, manufacturer, and information pages to display per store, allowing for tailored sitemaps for each store within your multi-store setup.
+- **Multilingual Support**: The extension is available in the following languages:
+  - Čeština (cs-cz)
+  - Deutsch (de-de)
+  - English (GB) (en-gb)
+  - English (US) (en-us)
+  - Español (es-es)
+  - Français (fr-fr)
+  - Magyar (hu-hu)
+  - Italiano (it-it)
+  - Русский (ru-ru)
+  - Slovenčina (sk-sk)
+  - فارسی (Persian) (fa-ir)
 
 ---
 
