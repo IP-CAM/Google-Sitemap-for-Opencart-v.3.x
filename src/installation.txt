@@ -1,54 +1,66 @@
 Playful Sparkle - Google Sitemap
 
-The Playful Sparkle - Google Sitemap for OpenCart 3.x is a user-friendly tool designed to enhance your online store's visibility in search engines. This extension simplifies the creation of XML sitemaps, which are crucial for helping search engines crawl and index your website effectively.
+The Playful Sparkle - Google Sitemap extension for OpenCart 3.x+ offers a
+refined XML sitemap generation solution that aligns with search engine standards
+and SEO best practices. This extension supports detailed customization, allowing
+OpenCart merchants to tailor sitemaps to include specific product pages (with
+images), category pages (with images), and manufacturer pages, all tagged to
+support complete, accurate indexing by search engines.
 
-The extension streamlines the process of submitting relevant information to Google. It allows users to create focused sitemaps that highlight important pages while optimizing their site for multilingual audiences. With the extension, sitemap updates are automated, saving users time and ensuring that their information remains accurate and current.
+A key feature of the extension is its use of PHP’s XMLWriter class to generate
+standards-compliant XML sitemaps per the https://sitemaps.org/protocol.html.
+This ensures that search engines can efficiently crawl site content, aided by
+the <lastmod> attribute included on product and category pages.
+The <lastmod> attribute, which tracks the date of the most recent content
+update, allows search engines to prioritize updated pages, increasing the
+likelihood of timely indexing.
 
-For more information, visit the extension GitHub page at https://github.com/playfulsparkle/oc3_google_sitemap.git.
+With multi-store and multi-language support, the extension allows merchants to
+create separate sitemaps for different store views and languages. This enables
+each store or language version of your site to have its own tailored sitemap,
+ensuring better indexing and visibility in search engines for audiences in
+different regions and languages.
 
-Demo frontend - https://opencart3.playfulsparkle.com/
-Demo backend - https://opencart3.playfulsparkle.com/admin/
+Features
 
-Key Features
+- Customizable Sitemap: Customize the sitemap to include product pages (with
+  images), category pages (with images), and manufacturer pages, ensuring
+  thorough indexing.
+- Standards-Compliant XML Sitemap: Generates a fully compliant XML sitemap using
+  PHP’s XMLWriter class, following the https://sitemaps.org/protocol.html.
+- Last Modified Tracking: Includes the <lastmod> attribute for product and
+  category pages, helping search engines track updates for timely indexing.
+- Compatible with Webmaster Tools: Fully compatible with commonly used webmaster
+  tools such as Google Search Console, Bing Webmaster Tools, and Yandex
+  Webmaster Tools.
+- Compatibility: Integrates smoothly with OpenCart 3.x+, supporting a range of
+  online store setups.
+- Multi-store Support: Supports multi-store setups by default, making it easy to
+  integrate across multiple OpenCart stores.
+- Multilingual Support: Ready for international use with languages including
+  Čeština (cs-cz), Deutsch (de-de), English (GB) (en-gb), English (US) (en-us),
+  Español (es-es), Français (fr-fr), Magyar (hu-hu), Italiano (it-it),
+  Русский (ru-ru), Slovenčina (sk-sk), and فارسی (fa-ir).
 
-* Customizable Sitemap Generation: Choose which content types to include (products, categories, manufacturers, informational pages).
-* Multilingual Support: Create language-specific XML sitemaps with URLs, titles, and descriptions in the chosen language.
-* Automatic Updates: The sitemap updates automatically with any changes to your store’s content.
-* User-Friendly Setup: Simple installation through the OpenCart interface for easy use.
-* Full Compatibility: Works seamlessly with OpenCart 3.x.
-* Multi-Store Support: Customize product, category, manufacturer, and information pages to display per store, allowing for tailored sitemaps for each store within your multi-store setup.
-* Multilingual Support: The extension is available in the following languages:
-  * Čeština (cs-cz)
-  * Deutsch (de-de)
-  * English (GB) (en-gb)
-  * English (US) (en-us)
-  * Español (es-es)
-  * Français (fr-fr)
-  * Magyar (hu-hu)
-  * Italiano (it-it)
-  * Русский (ru-ru)
-  * Slovenčina (sk-sk)
-  * فارسی (Persian) (fa-ir)
+For more information, visit the extension's GitHub page
+at https://github.com/playfulsparkle/oc3_google_sitemap.git.
 
-Installation Guide
+Demo frontend: https://opencart3.playfulsparkle.com/
+Demo backend: https://opencart3.playfulsparkle.com/admin/
 
-1. Download the "Playful Sparkle - Google Sitemap" Extension Package.
-2. Download the latest version of the Playful Sparkle - Google Sitemap extension from the link provided on this page.
-3. Upload the Extension Files:
-    1. Log in to your OpenCart admin panel.
-    2. Navigate to Extensions > Installer.
-    3. Click the "Upload" button and upload the file ps_google_sitemap.ocmod.zip.
-4. Install the Extension:
-    1. After uploading, click the green "Install" button.
-    2. Go to Extensions and select Feeds from the dropdown menu.
-    3. Locate the "Playful Sparkle - Google Sitemap" extension in the list.
-    4. Click the green "Install" button to activate it.
-5. Configure the Extension:
-    1. Stay on the Extensions page with Feeds selected.
-    2. Click the "Edit" button next to the installed Playful Sparkle - Google Sitemap extension.
-    3. Configure your sitemap settings as needed (e.g., frequency, priority).
-    4. Save your configuration.
+Installation Instructions
 
-Support & Feedback
+1. Download the latest version from the OpenCart Marketplace.
+2. Log in to your OpenCart admin panel.
+3. Navigate to Extensions > Installer.
+4. Click the Upload button and upload the ps_google_sitemap.ocmod.zip file.
+5. Navigate to Extensions > Extensions and select Feeds from the Choose the
+   extension type dropdown list.
+6. Locate the extension in the Feeds list and click the Install button.
+7. Click the Edit button, configure the extension parameters, and click the Save
+   button to save your settings.
 
-For support or any inquiries regarding the extension, feel free to open an issue on this repository or reach out via email at support@playfulsparkle.com.
+Support & Inquiries
+
+For assistance or inquiries related to this extension, please open an issue in
+the extension repository or contact us via email at support@playfulsparkle.com
