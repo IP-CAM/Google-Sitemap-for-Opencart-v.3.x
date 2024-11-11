@@ -111,13 +111,13 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
 
         $data['store_id'] = $store_id;
 
-        $data['stores'] = [];
+        $data['stores'] = array();
 
-        $data['stores'][] = [
+        $data['stores'][] = array(
             'store_id' => 0,
             'name' => $this->config->get('config_name') . '&nbsp;' . $this->language->get('text_default'),
             'href' => $this->url->link('extension/feed/ps_google_sitemap', 'user_token=' . $this->session->data['user_token'] . '&store_id=0'),
-        ];
+        );
 
         $this->load->model('setting/store');
 
@@ -126,18 +126,18 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
         $store_url = HTTP_CATALOG;
 
         foreach ($stores as $store) {
-            $data['stores'][] = [
+            $data['stores'][] = array(
                 'store_id' => $store['store_id'],
                 'name' => $store['name'],
                 'href' => $this->url->link('extension/feed/ps_google_sitemap', 'user_token=' . $this->session->data['user_token'] . '&store_id=' . $store['store_id']),
-            ];
+            );
 
             if ((int) $store['store_id'] === $store_id) {
                 $store_url = $store['url'];
             }
         }
 
-        $data['data_feed_urls'] = [];
+        $data['data_feed_urls'] = array();
 
         foreach ($languages as $language) {
             $data['data_feed_urls'][$language['language_id']] = rtrim($store_url, '/') . '/index.php?route=extension/feed/ps_google_sitemap&language=' . $language['code'];
