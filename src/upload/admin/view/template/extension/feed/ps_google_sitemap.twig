@@ -47,10 +47,10 @@
             <div class="tab-pane active" id="tab-general">
 
 							<fieldset>
-								<legend>{{ heading_categories }}</legend>
+								<legend>{{ heading_product }}</legend>
 
 								<div class="form-group">
-									<label class="col-sm-2 control-label" for="input-product">{{ entry_product }}</label>
+									<label for="input-product" class="col-sm-2 control-label">{{ entry_product }}</label>
 									<div class="col-sm-10">
 										<select name="feed_ps_google_sitemap_product" id="input-product" class="form-control">
 											{% if feed_ps_google_sitemap_product %}
@@ -65,7 +65,35 @@
 								</div>
 
 								<div class="form-group">
-									<label class="col-sm-2 control-label" for="input-category">{{ entry_category }}</label>
+									<label for="input-product-images" class="col-sm-2 control-label">{{ entry_product_images }}</label>
+									<div class="col-sm-10">
+										<select name="feed_ps_google_sitemap_product_images" id="input-product-images" class="form-control">
+											{% if feed_ps_google_sitemap_product_images %}
+											<option value="1" selected="selected">{{ text_enabled }}</option>
+											<option value="0">{{ text_disabled }}</option>
+											{% else %}
+											<option value="1">{{ text_enabled }}</option>
+											<option value="0" selected="selected">{{ text_disabled }}</option>
+											{% endif %}
+										</select>
+									</div>
+								</div>
+
+								<div id="max-product-images-group" class="form-group required"{% if not feed_ps_google_sitemap_product_images %} style="display: none;"{% endif %}>
+									<label for="input-max-product-images" class="col-sm-2 control-label">{{ entry_max_product_images }}</label>
+									<div class="col-sm-10">
+										<input type="text" name="feed_ps_google_sitemap_max_product_images" value="{{ feed_ps_google_sitemap_max_product_images }}" placeholder="{{ entry_fee }}" id="input-max-product-images" class="form-control" />
+										{% if error_input_max_product_images %}<div class="text-danger">{{ error_input_max_product_images }}</div>{% endif %}
+										<div class="help-block text-muted">{{ help_product_images }}</div>
+									</div>
+								</div>
+
+							</fieldset>
+							<fieldset>
+								<legend>{{ heading_category }}</legend>
+
+								<div class="form-group">
+									<label for="input-category" class="col-sm-2 control-label">{{ entry_category }}</label>
 									<div class="col-sm-10">
 										<select name="feed_ps_google_sitemap_category" id="input-category" class="form-control">
 											{% if feed_ps_google_sitemap_category %}
@@ -80,7 +108,26 @@
 								</div>
 
 								<div class="form-group">
-									<label class="col-sm-2 control-label" for="input-manufacturer">{{ entry_manufacturer }}</label>
+									<label for="input-category-images" class="col-sm-2 control-label">{{ entry_category_images }}</label>
+									<div class="col-sm-10">
+										<select name="feed_ps_google_sitemap_category_images" id="input-category-images" class="form-control">
+											{% if feed_ps_google_sitemap_category_images %}
+											<option value="1" selected="selected">{{ text_enabled }}</option>
+											<option value="0">{{ text_disabled }}</option>
+											{% else %}
+											<option value="1">{{ text_enabled }}</option>
+											<option value="0" selected="selected">{{ text_disabled }}</option>
+											{% endif %}
+										</select>
+									</div>
+								</div>
+
+							</fieldset>
+							<fieldset>
+								<legend>{{ heading_manufacturer }}</legend>
+
+								<div class="form-group">
+									<label for="input-manufacturer" class="col-sm-2 control-label">{{ entry_manufacturer }}</label>
 									<div class="col-sm-10">
 										<select name="feed_ps_google_sitemap_manufacturer" id="input-manufacturer" class="form-control">
 											{% if feed_ps_google_sitemap_manufacturer %}
@@ -95,7 +142,26 @@
 								</div>
 
 								<div class="form-group">
-									<label class="col-sm-2 control-label" for="input-information">{{ entry_information }}</label>
+									<label for="input-manufacturer-images" class="col-sm-2 control-label">{{ entry_manufacturer_images }}</label>
+									<div class="col-sm-10">
+										<select name="feed_ps_google_sitemap_manufacturer_images" id="input-manufacturer-images" class="form-control">
+											{% if feed_ps_google_sitemap_manufacturer_images %}
+											<option value="1" selected="selected">{{ text_enabled }}</option>
+											<option value="0">{{ text_disabled }}</option>
+											{% else %}
+											<option value="1">{{ text_enabled }}</option>
+											<option value="0" selected="selected">{{ text_disabled }}</option>
+											{% endif %}
+										</select>
+									</div>
+								</div>
+
+							</fieldset>
+							<fieldset>
+								<legend>{{ heading_information }}</legend>
+
+								<div class="form-group">
+									<label for="input-information" class="col-sm-2 control-label">{{ entry_information }}</label>
 									<div class="col-sm-10">
 										<select name="feed_ps_google_sitemap_information" id="input-information" class="form-control">
 											{% if feed_ps_google_sitemap_information %}
@@ -129,7 +195,7 @@
 							</div>
 
 							<div class="form-group">
-								<label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+								<label for="input-status" class="col-sm-2 control-label">{{ entry_status }}</label>
 								<div class="col-sm-10">
 									<select name="feed_ps_google_sitemap_status" id="input-status" class="form-control">
 										{% if feed_ps_google_sitemap_status %}
@@ -174,20 +240,22 @@
 			window.location = $(this).val();
 		});
 
-		window.addEventListener("load", (event) => {
-			var btns = document.querySelectorAll('.btn-copy');
+		$('#input-product-images').on('change', function () {
+			if ($(this).prop('selectedIndex')) {
+				$('#max-product-images-group').fadeOut();
+			} else {
+				$('#max-product-images-group').fadeIn();
+			}
+		});
 
-			btns.forEach(btn => {
-				btn.addEventListener("click", function () {
-					var copyText = document.querySelector("#" + this.dataset.inputId);
+    $('.btn-copy').on('click', function () {
+			var copyText = $("#" + $(this).data('inputId'));
 
-					if (copyText) {
-						copyText.select();
-						copyText.setSelectionRange(0, 99999);
-						document.execCommand("copy");
-					}
-				});
-			});
+			if (copyText.length) {
+					copyText.select();
+					copyText[0].setSelectionRange(0, 99999);
+					document.execCommand("copy");
+			}
 		});
 	</script>
 </div>

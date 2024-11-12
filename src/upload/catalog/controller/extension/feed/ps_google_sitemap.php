@@ -17,6 +17,7 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
             return;
         }
 
+        $this->load->model('tool/image');
         $this->load->model('setting/setting');
         $this->load->model('localisation/language');
 
@@ -31,8 +32,16 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
             $language_id = $cur_language['language_id'];
         }
 
-        $this->config->set('config_language_id', $language_id);
+        $sitemap_product = (bool) $this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_product', $this->config->get('config_store_id'));
+        $sitemap_product_images = (bool) $this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_product_images', $this->config->get('config_store_id'));
+        $sitemap_max_product_images = (int) $this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_max_product_images', $this->config->get('config_store_id'));
+        $sitemap_category = (bool) $this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_category', $this->config->get('config_store_id'));
+        $sitemap_category_images = (bool) $this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_category_images', $this->config->get('config_store_id'));
+        $sitemap_manufacturer = (bool) $this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_manufacturer', $this->config->get('config_store_id'));
+        $sitemap_manufacturer_images = (bool) $this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_manufacturer_images', $this->config->get('config_store_id'));
+        $sitemap_information = (bool) $this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_information', $this->config->get('config_store_id'));
 
+        $this->config->set('config_language_id', $language_id);
 
         $xml = new \XMLWriter();
         $xml->openMemory();
@@ -43,9 +52,8 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
         $xml->writeAttribute('xmlns:image', 'http://www.google.com/schemas/sitemap-image/1.1');
 
         #region Product
-        if ($this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_product', $this->config->get('config_store_id'))) {
+        if ($sitemap_product) {
             $this->load->model('catalog/product');
-            $this->load->model('tool/image');
 
             // Fetch products in chunks to handle large datasets
             $products = $this->model_catalog_product->getProducts();
@@ -60,10 +68,62 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
                 $xml->writeElement('loc', str_replace('&amp;', '&', $product_url));
                 $xml->writeElement('lastmod', date('Y-m-d\TH:i:sP', strtotime($product['date_modified'])));
 
-                if (!empty($product['image'])) {
+                if ($sitemap_product_images && $sitemap_max_product_images > 0) {
+                    if (!empty($product['image'])) {
+                        $xml->startElement('image:image');
+                        $xml->writeElement('image:loc', $this->model_tool_image->resize(
+                            html_entity_decode($product['image'], ENT_QUOTES, 'UTF-8'),
+                            $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'),
+                            $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height')
+                        ));
+                        $xml->endElement();
+                    }
+
+                    if ($sitemap_max_product_images > 1) {
+                        $product_images = $this->model_catalog_product->getProductImages($product['product_id']);
+                        $product_images = array_slice($product_images, 0, $sitemap_max_product_images - 1);
+
+                        foreach ($product_images as $product_image) {
+                            $xml->startElement('image:image');
+                            $xml->writeElement('image:loc', $this->model_tool_image->resize(
+                                html_entity_decode($product_image['image'], ENT_QUOTES, 'UTF-8'),
+                                $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'),
+                                $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height')
+                            ));
+                            $xml->endElement();
+                        }
+                    }
+                }
+
+                $xml->endElement();
+            }
+        }
+        #endregion
+
+
+        #region Category
+        if ($sitemap_category) {
+            $this->load->model('catalog/category');
+
+            $this->getCategories($xml, $sitemap_category_images, 0);
+        }
+        #endregion
+
+        #region Manufacturer
+        if ($sitemap_manufacturer) {
+            $this->load->model('catalog/manufacturer');
+
+            $manufacturers = $this->model_catalog_manufacturer->getManufacturers();
+
+            foreach ($manufacturers as $manufacturer) {
+                $xml->startElement('url');
+                $manufacturer_url = $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $manufacturer['manufacturer_id']);
+                $xml->writeElement('loc', str_replace('&amp;', '&', $manufacturer_url));
+
+                if ($sitemap_manufacturer_images && !empty($manufacturer['image'])) {
                     $xml->startElement('image:image');
                     $xml->writeElement('image:loc', $this->model_tool_image->resize(
-                        html_entity_decode($product['image'], ENT_QUOTES, 'UTF-8'),
+                        html_entity_decode($manufacturer['image'], ENT_QUOTES, 'UTF-8'),
                         $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'),
                         $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height')
                     ));
@@ -75,32 +135,8 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
         }
         #endregion
 
-
-        #region Category
-        if ($this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_category', $this->config->get('config_store_id'))) {
-            $this->load->model('catalog/category');
-
-            $this->getCategories($xml, 0);
-        }
-        #endregion
-
-        #region Manufacturer
-        if ($this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_manufacturer', $this->config->get('config_store_id'))) {
-            $this->load->model('catalog/manufacturer');
-
-            $manufacturers = $this->model_catalog_manufacturer->getManufacturers();
-
-            foreach ($manufacturers as $manufacturer) {
-                $xml->startElement('url');
-                $manufacturer_url = $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $manufacturer['manufacturer_id']);
-                $xml->writeElement('loc', str_replace('&amp;', '&', $manufacturer_url));
-                $xml->endElement();
-            }
-        }
-        #endregion
-
         #region Information
-        if ($this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_information', $this->config->get('config_store_id'))) {
+        if ($sitemap_information) {
             $this->load->model('catalog/information');
 
             $informations = $this->model_catalog_information->getInformations();
@@ -142,7 +178,7 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
      *
      * @return void
      */
-    protected function getCategories($xml, $parent_id)
+    protected function getCategories($xml, $sitemap_category_images, $parent_id)
     {
         $categories = $this->model_catalog_category->getCategories($parent_id);
 
@@ -155,9 +191,20 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
             $category_url = $this->url->link('product/category', 'path=' . $category['category_id']);
             $xml->writeElement('loc', str_replace('&amp;', '&', $category_url));
             $xml->writeElement('lastmod', date('Y-m-d\TH:i:sP', strtotime($category['date_modified'])));
+
+            if ($sitemap_category_images && !empty($category['image'])) {
+                $xml->startElement('image:image');
+                $xml->writeElement('image:loc', $this->model_tool_image->resize(
+                    html_entity_decode($category['image'], ENT_QUOTES, 'UTF-8'),
+                    $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'),
+                    $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height')
+                ));
+                $xml->endElement();
+            }
+
             $xml->endElement();
 
-            $this->getCategories($xml, $category['category_id']);
+            $this->getCategories($xml, $sitemap_category_images, $category['category_id']);
         }
     }
 }

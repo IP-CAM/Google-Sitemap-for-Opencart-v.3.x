@@ -44,6 +44,12 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
             $data['error_warning'] = '';
         }
 
+        if (isset($this->error['input_max_product_images'])) {
+            $data['error_input_max_product_images'] = $this->error['input_max_product_images'];
+        } else {
+            $data['error_input_max_product_images'] = '';
+        }
+
 
         if (isset($this->request->get['store_id'])) {
             $store_id = (int) $this->request->get['store_id'];
@@ -74,33 +80,57 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
         $data['cancel'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=feed', true);
 
         if (isset($this->request->post['feed_ps_google_sitemap_status'])) {
-            $data['feed_ps_google_sitemap_status'] = $this->request->post['feed_ps_google_sitemap_status'];
+            $data['feed_ps_google_sitemap_status'] = (bool) $this->request->post['feed_ps_google_sitemap_status'];
         } else {
-            $data['feed_ps_google_sitemap_status'] = $this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_status', $store_id);
+            $data['feed_ps_google_sitemap_status'] = (bool) $this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_status', $store_id);
         }
 
         if (isset($this->request->post['feed_ps_google_sitemap_product'])) {
-            $data['feed_ps_google_sitemap_product'] = $this->request->post['feed_ps_google_sitemap_product'];
+            $data['feed_ps_google_sitemap_product'] = (bool) $this->request->post['feed_ps_google_sitemap_product'];
         } else {
-            $data['feed_ps_google_sitemap_product'] = $this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_product', $store_id);
+            $data['feed_ps_google_sitemap_product'] = (bool) $this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_product', $store_id);
+        }
+
+        if (isset($this->request->post['feed_ps_google_sitemap_product_images'])) {
+            $data['feed_ps_google_sitemap_product_images'] = (bool) $this->request->post['feed_ps_google_sitemap_product_images'];
+        } else {
+            $data['feed_ps_google_sitemap_product_images'] = (bool) $this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_product_images', $store_id);
+        }
+
+        if (isset($this->request->post['feed_ps_google_sitemap_max_product_images'])) {
+            $data['feed_ps_google_sitemap_max_product_images'] = (int) $this->request->post['feed_ps_google_sitemap_max_product_images'];
+        } else {
+            $data['feed_ps_google_sitemap_max_product_images'] = (int) $this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_max_product_images', $store_id);
         }
 
         if (isset($this->request->post['feed_ps_google_sitemap_category'])) {
-            $data['feed_ps_google_sitemap_category'] = $this->request->post['feed_ps_google_sitemap_category'];
+            $data['feed_ps_google_sitemap_category'] = (bool) $this->request->post['feed_ps_google_sitemap_category'];
         } else {
-            $data['feed_ps_google_sitemap_category'] = $this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_category', $store_id);
+            $data['feed_ps_google_sitemap_category'] = (bool) $this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_category', $store_id);
+        }
+
+        if (isset($this->request->post['feed_ps_google_sitemap_category_images'])) {
+            $data['feed_ps_google_sitemap_category_images'] = (bool) $this->request->post['feed_ps_google_sitemap_category_images'];
+        } else {
+            $data['feed_ps_google_sitemap_category_images'] = (bool) $this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_category_images', $store_id);
         }
 
         if (isset($this->request->post['feed_ps_google_sitemap_manufacturer'])) {
-            $data['feed_ps_google_sitemap_manufacturer'] = $this->request->post['feed_ps_google_sitemap_manufacturer'];
+            $data['feed_ps_google_sitemap_manufacturer'] = (bool) $this->request->post['feed_ps_google_sitemap_manufacturer'];
         } else {
-            $data['feed_ps_google_sitemap_manufacturer'] = $this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_manufacturer', $store_id);
+            $data['feed_ps_google_sitemap_manufacturer'] = (bool) $this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_manufacturer', $store_id);
+        }
+
+        if (isset($this->request->post['feed_ps_google_sitemap_manufacturer_images'])) {
+            $data['feed_ps_google_sitemap_manufacturer_images'] = (bool) $this->request->post['feed_ps_google_sitemap_manufacturer_images'];
+        } else {
+            $data['feed_ps_google_sitemap_manufacturer_images'] = (bool) $this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_manufacturer_images', $store_id);
         }
 
         if (isset($this->request->post['feed_ps_google_sitemap_information'])) {
-            $data['feed_ps_google_sitemap_information'] = $this->request->post['feed_ps_google_sitemap_information'];
+            $data['feed_ps_google_sitemap_information'] = (bool) $this->request->post['feed_ps_google_sitemap_information'];
         } else {
-            $data['feed_ps_google_sitemap_information'] = $this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_information', $store_id);
+            $data['feed_ps_google_sitemap_information'] = (bool) $this->model_setting_setting->getSettingValue('feed_ps_google_sitemap_information', $store_id);
         }
 
         $this->load->model('localisation/language');
@@ -162,6 +192,26 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
             $this->error['warning'] = $this->language->get('error_store_id');
         }
 
+        if (!$this->error && $this->request->post['feed_ps_google_sitemap_max_product_images'] < 0) {
+            $this->error['input_max_product_images'] = $this->language->get('error_max_product_images_min');
+        }
+
         return !$this->error;
+    }
+
+    public function install()
+    {
+        $this->load->model('setting/setting');
+
+        $data = array(
+            'feed_ps_google_sitemap_max_product_images' => 1,
+        );
+
+        $this->model_setting_setting->editSetting('feed_ps_google_sitemap', $data);
+    }
+
+    public function uninstall()
+    {
+
     }
 }
