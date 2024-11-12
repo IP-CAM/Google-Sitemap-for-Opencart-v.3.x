@@ -1,6 +1,6 @@
 # Playful Sparkle - Google Sitemap for OpenCart 3
 
-The ***Playful Sparkle - Google Sitemap** extension for OpenCart 3.x+ offers a refined XML sitemap generation solution that aligns with search engine standards and SEO best practices. This extension supports detailed customization, allowing OpenCart merchants to tailor sitemaps to include specific product pages (with images), category pages (with images), and manufacturer pages, all tagged to support complete, accurate indexing by search engines.
+The **Playful Sparkle - Google Sitemap** extension for OpenCart 3.x+ offers a refined XML sitemap generation solution that aligns with search engine standards and SEO best practices. This extension supports detailed customization, allowing OpenCart merchants to tailor sitemaps to include specific product pages (with images), category pages (with images), and manufacturer pages, all tagged to support complete, accurate indexing by search engines.
 
 A key feature of the extension is its use of PHP’s `XMLWriter` class to generate standards-compliant XML sitemaps per the [Sitemaps.org protocol](https://sitemaps.org/protocol.html). This ensures that search engines can efficiently crawl site content, aided by the `<lastmod>` attribute included on product and category pages. The `<lastmod>` attribute, which tracks the date of the most recent content update, allows search engines to prioritize updated pages, increasing the likelihood of timely indexing.
 
