@@ -79,6 +79,8 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
 
         $data['cancel'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=feed', true);
 
+        $data['user_token'] = $this->session->data['user_token'];
+
         if (isset($this->request->post['feed_ps_google_sitemap_status'])) {
             $data['feed_ps_google_sitemap_status'] = (bool) $this->request->post['feed_ps_google_sitemap_status'];
         } else {
@@ -169,8 +171,24 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
 
         $data['data_feed_urls'] = array();
 
+        $feed_urls = array();
+
         foreach ($languages as $language) {
-            $data['data_feed_urls'][$language['language_id']] = rtrim($store_url, '/') . '/index.php?route=extension/feed/ps_google_sitemap&language=' . $language['code'];
+            $feed_url = rtrim($store_url, '/') . '/' . $language['code'] . '/sitemap.xml';
+
+            $feed_urls[] = $feed_url;
+
+            $data['data_feed_urls'][$language['language_id']] = $feed_url;
+        }
+
+        $data['robots_txt_errors'] = [];
+
+        $robotsTxtValidationResult = $this->_validateRobotsTxt($feed_urls);
+
+        foreach ($robotsTxtValidationResult as $feed_url => $result) {
+            if ($result) {
+                $data['robots_txt_errors'][] = sprintf($this->language->get('text_feed_url_blocked'), $feed_url);
+            }
         }
 
         $data['text_contact'] = sprintf($this->language->get('text_contact'), self::EXTENSION_EMAIL, self::EXTENSION_EMAIL, self::EXTENSION_DOC);
@@ -214,4 +232,179 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
     {
 
     }
+    private function _validateRobotsTxt($urls)
+    {
+        $results = [];
+
+        // Path to robots.txt
+        $robotsTxt = dirname(DIR_SYSTEM) . '/robots.txt';
+
+        // Read the robots.txt file lines
+        $lines = file($robotsTxt);
+
+        // If the file is not readable, assume no URLs are blocked
+        if (false === $lines) {
+            foreach ($urls as $url) {
+                $results[$url] = false; // No blocking when no robots.txt is found
+            }
+            return $results;
+        }
+
+        // Iterate through each URL to check
+        foreach ($urls as $url) {
+            $parsedUrl = parse_url($url);
+            $path = $parsedUrl['path'];
+
+            // Variables to track user-agent and blocking status
+            $userAgent = null;
+            $isBlocked = false;
+            $disallowedPaths = [];
+            $defaultUserAgentFound = false;
+
+            // Check each line in robots.txt
+            foreach ($lines as $line) {
+                $line = trim($line);
+
+                // Skip empty lines or comments
+                if (empty($line) || $line[0] == '#') {
+                    continue;
+                }
+
+                // Check if it's a User-agent directive
+                if (strpos($line, 'User-agent:') === 0) {
+                    $userAgent = trim(substr($line, 11)); // Extract user-agent
+                    $defaultUserAgentFound = false;
+                    continue; // Move to the next line
+                }
+
+                // If no user-agent found yet, default to Googlebot
+                if ($userAgent === null && !$defaultUserAgentFound) {
+                    $userAgent = 'Googlebot';
+                    $defaultUserAgentFound = true;
+                }
+
+                // If user-agent is Googlebot or wildcard '*', process the Disallow
+                if ($userAgent === 'Googlebot' || $userAgent === '*') {
+                    if (strpos($line, 'Disallow:') === 0) {
+                        $disallowedPath = trim(substr($line, 9)); // Extract disallowed path
+                        $disallowedPaths[] = $disallowedPath; // Store disallowed paths
+                    }
+                }
+            }
+
+            // Check if any of the disallowed paths match the current URL
+            foreach ($disallowedPaths as $disallowedPath) {
+                $regexPattern = $this->convertToRegex($disallowedPath);
+                if (preg_match($regexPattern, $path)) {
+                    $isBlocked = true;
+                    break; // Stop checking if the URL is already blocked
+                }
+            }
+
+            // Store the result for this URL
+            $results[$url] = $isBlocked;
+        }
+
+        return $results; // Return the array of results for each URL
+    }
+
+
+
+
+    /**
+     * Converts a Disallow pattern to a regular expression
+     * This function handles basic wildcard conversion like * and $
+     *
+     * @param string $disallowedPath
+     * @return string
+     */
+    private function convertToRegex($disallowedPath)
+    {
+        // Escape any regular expression special characters
+        $disallowedPath = preg_quote($disallowedPath, '/');
+
+        // Replace wildcard '*' with '.*' to match any number of characters
+        $disallowedPath = str_replace('\*', '.*', $disallowedPath);
+
+        // Replace '$' with '\z' to match the end of the string
+        $disallowedPath = str_replace('\$', '\z', $disallowedPath);
+
+        // Make sure the regular expression matches the entire path (not just a part of it)
+        return '/^' . $disallowedPath . '/';
+    }
+
+    private function _patchHtaccess()
+    {
+        $htaccess_filename = dirname(DIR_SYSTEM) . '/.htaccess';
+
+        if (false === $lines = file($htaccess_filename)) {
+            return false;
+        }
+
+        $this->load->model('localisation/language');
+
+        $languages = $this->model_localisation_language->getLanguages();
+
+        $rules = [];
+
+        foreach ($languages as $language) {
+            $canAddRule = true;
+
+            $rule = 'RewriteRule ^' . $language['code'] . '/sitemap.xml$ index.php?route=extension/feed/ps_google_sitemap&language=' . $language['code'] . ' [L]';
+
+            foreach ($lines as $line) {
+                if (strpos($line, $rule) !== false) {
+                    $canAddRule = false;
+                }
+            }
+
+            if ($canAddRule) {
+                $rules[] = $rule;
+            }
+        }
+
+        $new_content = '';
+        $foundRewriteEngine = false;
+
+        foreach ($lines as $line) {
+            $new_content .= $line;
+
+            if (trim($line) === 'RewriteEngine On' && !$foundRewriteEngine) {
+                $foundRewriteEngine = true;
+
+                foreach ($rules as $rule) {
+                    $new_content .= $rule . PHP_EOL;
+                }
+            }
+        }
+
+        if ($rules && !empty($new_content)) {
+            return file_put_contents($htaccess_filename, $new_content) !== false;
+        }
+
+        return true;
+    }
+
+    public function patchhtaccess()
+    {
+        $this->load->language('extension/feed/ps_google_sitemap');
+
+        $json = array();
+
+        if (!$this->user->hasPermission('modify', 'extension/feed/ps_google_sitemap')) {
+            $json['error'] = $this->language->get('error_permission');
+        }
+
+        if (!$json) {
+            if (!$this->_patchHtaccess()) {
+                $json['error'] = $this->language->get('error_htaccess_update');
+            } else {
+                $json['success'] = $this->language->get('text_htaccess_update_success');
+            }
+        }
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
+    }
+
 }

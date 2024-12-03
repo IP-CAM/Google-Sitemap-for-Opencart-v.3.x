@@ -39,6 +39,9 @@ $_['entry_information']            = 'Información';
 $_['entry_data_feed_url']          = 'URL del feed de datos';
 $_['entry_active_store']           = 'Tienda activa';
 
+// Button
+$_['button_patch_htaccess']        = 'Aplicar modificación a .htaccess';
+
 // Help
 $_['help_product_images']          = 'La exportación de imágenes de productos puede aumentar el tiempo de procesamiento inicialmente (solo cuando las imágenes se procesan por primera vez), y el tamaño del archivo XML sitemap será mayor como resultado.';
 

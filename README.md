@@ -4,6 +4,10 @@ The **Playful Sparkle - Google Sitemap** extension for OpenCart 3.x+ offers a re
 
 A key feature of the extension is its use of PHP’s `XMLWriter` class to generate standards-compliant XML sitemaps per the [Sitemaps.org protocol](https://sitemaps.org/protocol.html). This ensures that search engines can efficiently crawl site content, aided by the `<lastmod>` attribute included on product and category pages. The `<lastmod>` attribute, which tracks the date of the most recent content update, allows search engines to prioritize updated pages, increasing the likelihood of timely indexing.
 
+To streamline sitemap accessibility, the extension can automatically update the `.htaccess` file, enabling users and Google Search Console to access sitemaps using clean, SEO-friendly URLs like `/en-gb/sitemap.xml` instead of the default OpenCart URL format, such as `index.php?route=extension/feed/ps_google_sitemap&language=en-gb`. This improvement ensures compatibility with Google Search Console requirements and simplifies sitemap management.
+
+Additionally, the extension validates the `robots.txt` file to verify whether the sitemap is allowed by Google. This proactive check notifies you early if adjustments to the file are needed, ensuring your sitemap is discoverable and functional for search engine indexing.
+
 With multi-store and multi-language support, the extension allows merchants to create separate sitemaps for different store views and languages. This enables each store or language version of your site to have its own tailored sitemap, ensuring better indexing and visibility in search engines for audiences in different regions and languages.
 
 ---
