@@ -27,6 +27,8 @@ $_['text_feed_url_blocked']        = 'URL adresa mapy stránok "%s" je blokovan�
 // Tab
 $_['tab_general']                  = 'Všeobecné';
 $_['tab_help_and_support']         = 'Pomoc a podpora';
+$_['tab_data_feed_url']            = 'URL dátového feedu';
+$_['tab_data_feed_seo_url']        = 'SEO-priateľská URL dátového feedu';
 
 // Entry
 $_['entry_status']                 = 'Stav';
@@ -40,12 +42,14 @@ $_['entry_manufacturer_images']    = 'Exportovať obrázky výrobcov';
 $_['entry_information']            = 'Informácie';
 $_['entry_data_feed_url']          = 'URL dátového feedu';
 $_['entry_active_store']           = 'Aktívny obchod';
+$_['entry_htaccess_mod']           = 'Úprava .htaccess';
 
 // Button
 $_['button_patch_htaccess']        = 'Použiť úpravy .htaccess';
 
 // Help
 $_['help_product_images']          = 'Exportovanie obrázkov produktov môže na začiatku zvýšiť čas spracovania (iba pri prvom spracovaní obrázkov), a veľkosť súboru XML mapy stránky sa tým zväčší.';
+$_['help_htaccess_mod']            = 'SEO-priateľská URL dátového feedu vyžaduje úpravu súboru .htaccess. Kód môžete pridať manuálne skopírovaním a vložením do súboru .htaccess, alebo jednoducho kliknite na oranžové tlačidlo „Patch .htaccess“ pre automatické vykonanie zmien.';
 
 // Error
 $_['error_permission']             = 'Upozornenie: Nemáte oprávnenie na úpravu Google Sitemap feedu!';

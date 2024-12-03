@@ -27,6 +27,8 @@ $_['text_feed_url_blocked']        = 'L’URL della sitemap "%s" è bloccato dal
 // Tab
 $_['tab_general']                  = 'Generale';
 $_['tab_help_and_support']         = 'Aiuto &amp; Supporto';
+$_['tab_data_feed_url']            = 'URL del feed dati';
+$_['tab_data_feed_seo_url']        = 'URL del feed dati SEO-friendly';
 
 // Entry
 $_['entry_status']                 = 'Stato';
@@ -40,12 +42,14 @@ $_['entry_manufacturer_images']    = 'Esporta immagini dei produttoria';
 $_['entry_information']            = 'Informazioni';
 $_['entry_data_feed_url']          = 'URL feed dati';
 $_['entry_active_store']           = 'Negozio attivo';
+$_['entry_htaccess_mod']           = 'Modifica .htaccess';
 
 // Button
 $_['button_patch_htaccess']        = 'Applicare la modifica a .htaccess';
 
 // Help
 $_['help_product_images']          = 'L’esportazione delle immagini dei prodotti può aumentare inizialmente il tempo di elaborazione (solo al primo processo delle immagini), e la dimensione del file della sitemap XML sarà maggiore di conseguenza.';
+$_['help_htaccess_mod']            = 'L\'URL del feed dati SEO-friendly richiede la modifica del file .htaccess. Puoi aggiungere manualmente il codice richiesto copiandolo e incollandolo nel file .htaccess, oppure fare semplicemente clic sul pulsante arancione „Patch .htaccess” per applicare automaticamente le modifiche.';
 
 // Error
 $_['error_permission']             = 'Attenzione: Non hai il permesso di modificare il feed di Google Sitemap!';

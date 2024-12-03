@@ -27,6 +27,9 @@ $_['text_feed_url_blocked']        = 'URL adresa mapy stránek "%s" je blokován
 // Tab
 $_['tab_general']                  = 'Obecné';
 $_['tab_help_and_support']         = 'Pomoc a podpora';
+$_['tab_data_feed_url']            = 'URL datového feedu';
+$_['tab_data_feed_seo_url']        = 'SEO-přátelská URL datového feedu';
+
 
 // Entry
 $_['entry_status']                 = 'Stav';
@@ -38,14 +41,16 @@ $_['entry_category_images']        = 'Exportovat obrázky kategorií';
 $_['entry_manufacturer']           = 'Výrobce';
 $_['entry_manufacturer_images']    = 'Exportovat obrázky výrobců';
 $_['entry_information']            = 'Informace';
-$_['entry_data_feed_url']          = 'URL datového kanálu';
+$_['entry_data_feed_url']          = 'URL datového feedu';
 $_['entry_active_store']           = 'Aktivní obchod';
+$_['entry_htaccess_mod']           = 'Úprava .htaccess';
 
 // Button
 $_['button_patch_htaccess']        = 'Použít úpravu .htaccess';
 
 // Help
 $_['help_product_images']          = 'Export obrázků produktů může zpočátku zvýšit dobu zpracování (pouze při prvním zpracování obrázků), a velikost souboru XML sitemap se tím zvětší.';
+$_['help_htaccess_mod']            = 'Pro SEO-přátelskou URL datového feedu je nutné upravit soubor .htaccess. Kód můžete přidat ručně zkopírováním a vložením do souboru .htaccess, nebo jednoduše klikněte na oranžové tlačítko „Patch .htaccess“ pro automatické provedení změn.';
 
 // Error
 $_['error_permission']             = 'Upozornění: Nemáte oprávnění upravovat Google Sitemap feed!';

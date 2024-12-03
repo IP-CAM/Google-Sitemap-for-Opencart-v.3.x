@@ -169,25 +169,33 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
             }
         }
 
+        $data['data_feed_seo_urls'] = array();
         $data['data_feed_urls'] = array();
 
-        $feed_urls = array();
+        $feed_seo_urls = array();
+        $htaccess_mod = array();
 
         foreach ($languages as $language) {
-            $feed_url = rtrim($store_url, '/') . '/' . $language['code'] . '/sitemap.xml';
+            $feed_seo_url = rtrim($store_url, '/') . '/' . $language['code'] . '/sitemap.xml';
+            $feed_url = rtrim($store_url, '/') . '/index.php?route=extension/feed/ps_google_sitemap&language=' . $language['code'];
 
-            $feed_urls[] = $feed_url;
+            $feed_seo_urls[] = $feed_seo_url;
 
+            $data['data_feed_seo_urls'][$language['language_id']] = $feed_seo_url;
             $data['data_feed_urls'][$language['language_id']] = $feed_url;
+
+            $htaccess_mod[] = 'RewriteRule ^' . $language['code'] . '/sitemap.xml$ index.php?route=extension/feed/ps_google_sitemap&language=' . $language['code'] . ' [L]';
         }
+
+        $data['htaccess_mod'] = implode(PHP_EOL, $htaccess_mod);
 
         $data['robots_txt_errors'] = [];
 
-        $robotsTxtValidationResult = $this->_validateRobotsTxt($feed_urls);
+        $robotsTxtValidationResult = $this->_validateRobotsTxt($feed_seo_urls);
 
-        foreach ($robotsTxtValidationResult as $feed_url => $result) {
+        foreach ($robotsTxtValidationResult as $feed_seo_url => $result) {
             if ($result) {
-                $data['robots_txt_errors'][] = sprintf($this->language->get('text_feed_url_blocked'), $feed_url);
+                $data['robots_txt_errors'][] = sprintf($this->language->get('text_feed_url_blocked'), $feed_seo_url);
             }
         }
 

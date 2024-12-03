@@ -25,6 +25,8 @@ $_['text_contact']                 = '<p>Para más asistencia, póngase en conta
 // Tab
 $_['tab_general']                  = 'General';
 $_['tab_help_and_support']         = 'Ayuda y soporte';
+$_['tab_data_feed_url']            = 'URL del feed de datos';
+$_['tab_data_feed_seo_url']        = 'URL del feed de datos SEO-amigable';
 
 // Entry
 $_['entry_status']                 = 'Estado';
@@ -38,12 +40,14 @@ $_['entry_manufacturer_images']    = 'Exportar imágenes de fabricantes';
 $_['entry_information']            = 'Información';
 $_['entry_data_feed_url']          = 'URL del feed de datos';
 $_['entry_active_store']           = 'Tienda activa';
+$_['entry_htaccess_mod']           = 'Modificación de .htaccess';
 
 // Button
 $_['button_patch_htaccess']        = 'Aplicar modificación a .htaccess';
 
 // Help
 $_['help_product_images']          = 'La exportación de imágenes de productos puede aumentar el tiempo de procesamiento inicialmente (solo cuando las imágenes se procesan por primera vez), y el tamaño del archivo XML sitemap será mayor como resultado.';
+$_['help_htaccess_mod']            = 'La URL SEO-amigable del feed de datos requiere una modificación de su archivo .htaccess. Puede agregar el código necesario manualmente copiándolo y pegándolo en su archivo .htaccess, o simplemente hacer clic en el botón naranja "Patch .htaccess" para aplicar los cambios automáticamente.';
 
 // Error
 $_['error_permission']             = 'Advertencia: ¡No tiene permiso para modificar el feed de Google Sitemap!';

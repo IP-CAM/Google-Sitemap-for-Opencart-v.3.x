@@ -27,6 +27,8 @@ $_['text_feed_url_blocked']        = 'L’URL du sitemap "%s" est bloquée par l
 // Tab
 $_['tab_general']                  = 'Général';
 $_['tab_help_and_support']         = 'Aide &amp; Support';
+$_['tab_data_feed_url']            = 'URL du flux de données';
+$_['tab_data_feed_seo_url']        = 'URL du flux de données optimisée SEO';
 
 // Entry
 $_['entry_status']                 = 'Statut';
@@ -40,12 +42,14 @@ $_['entry_manufacturer_images']    = 'Exporter les images des fabricants';
 $_['entry_information']            = 'Information';
 $_['entry_data_feed_url']          = 'URL du flux de données';
 $_['entry_active_store']           = 'Magasin actif';
+$_['entry_htaccess_mod']           = 'Modification de .htaccess';
 
 // Button
 $_['button_patch_htaccess']        = 'Appliquer la modification à .htaccess';
 
 // Help
 $_['help_product_images']          = 'L’exportation des images de produits peut augmenter le temps de traitement au début (seulement lors du premier traitement des images), et la taille du fichier sitemap XML sera plus grande en conséquence.';
+$_['help_htaccess_mod']            = 'L\'URL du flux de données optimisée pour le SEO nécessite une modification de votre fichier .htaccess. Vous pouvez ajouter le code requis manuellement en le copiant et en le collant dans votre fichier .htaccess, ou simplement cliquer sur le bouton orange « Patch .htaccess » pour appliquer les modifications automatiquement.';
 
 // Error
 $_['error_permission']             = 'Avertissement : Vous n\'avez pas l\'autorisation de modifier le flux Google Sitemap !';

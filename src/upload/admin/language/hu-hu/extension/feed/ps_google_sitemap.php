@@ -27,6 +27,8 @@ $_['text_feed_url_blocked']        = 'A webhelytérkép URL-je ("%s") le van til
 // Tab
 $_['tab_general']                  = 'Általános';
 $_['tab_help_and_support']         = 'Segítség &amp; támogatás';
+$_['tab_data_feed_url']            = 'Adatfolyam URL';
+$_['tab_data_feed_seo_url']        = 'SEO-barát adatfolyam URL';
 
 // Entry
 $_['entry_status']                 = 'Állapot';
@@ -38,14 +40,16 @@ $_['entry_category_images']        = 'Kategóriaképek exportálása';
 $_['entry_manufacturer']           = 'Gyártó';
 $_['entry_manufacturer_images']    = 'Gyártóképek exportálása';
 $_['entry_information']            = 'Információ';
-$_['entry_data_feed_url']          = 'Adatfeed URL';
+$_['entry_data_feed_url']          = 'Adatfolyam URL';
 $_['entry_active_store']           = 'Aktív áruház';
+$_['entry_htaccess_mod']           = '.htaccess módosítása';
 
 // Button
 $_['button_patch_htaccess']        = '.htaccess módosítása';
 
 // Help
 $_['help_product_images']          = 'A termékképek exportálása kezdetben megnövelheti a folyamat idejét (csak az első képfeldolgozásnál), és ennek eredményeként az XML webhelytérkép fájlmérete is nagyobb lesz.';
+$_['help_htaccess_mod']            = 'A SEO-barát adatfolyam URL-je módosítást igényel a .htaccess fájlban. A szükséges kódot manuálisan is hozzáadhatja a .htaccess fájlhoz másolással és beillesztéssel, vagy egyszerűen kattintson a narancssárga „Patch .htaccess” gombra a módosítások automatikus alkalmazásához.';
 
 // Error
 $_['error_permission']             = 'Figyelmeztetés: Nincs jogosultsága a Google Oldaltérkép feed módosításához!';

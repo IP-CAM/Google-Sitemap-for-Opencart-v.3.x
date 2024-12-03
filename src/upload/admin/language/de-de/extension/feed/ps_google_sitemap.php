@@ -27,6 +27,8 @@ $_['text_feed_url_blocked']        = 'Die Sitemap-URL "%s" wird durch die robots
 // Tab
 $_['tab_general']                  = 'Allgemein';
 $_['tab_help_and_support']         = 'Hilfe &amp; Unterstützung';
+$_['tab_data_feed_url']            = 'Datenfeed-URL';
+$_['tab_data_feed_seo_url']        = 'SEO-freundliche Datenfeed-URL';
 
 // Entry
 $_['entry_status']                 = 'Status';
@@ -38,14 +40,16 @@ $_['entry_category_images']        = 'Kategoriebilder exportieren';
 $_['entry_manufacturer']           = 'Hersteller';
 $_['entry_manufacturer_images']    = 'Herstellerbilder exportieren';
 $_['entry_information']            = 'Information';
-$_['entry_data_feed_url']          = 'Daten-Feed-Url';
+$_['entry_data_feed_url']          = 'Datenfeed-URL';
 $_['entry_active_store']           = 'Aktiver Shop';
+$_['entry_htaccess_mod']           = '.htaccess-Modifikation';
 
 // Button
 $_['button_patch_htaccess']        = 'Änderungen an .htaccess anwenden';
 
 // Help
 $_['help_product_images']          = 'Das Exportieren von Produktbildern kann anfänglich die Verarbeitungszeit erhöhen (nur beim ersten Verarbeiten der Bilder), und die XML-Sitemap-Datei wird dadurch größer.';
+$_['help_htaccess_mod']            = 'Die SEO-freundliche URL des Datenfeeds erfordert eine Modifikation der .htaccess-Datei. Sie können den erforderlichen Code manuell hinzufügen, indem Sie ihn kopieren und in die .htaccess-Datei einfügen, oder einfach auf die orangefarbene Schaltfläche „Patch .htaccess“ klicken, um die Änderungen automatisch anzuwenden.';
 
 // Error
 $_['error_permission']             = 'Warnung: Sie haben keine Berechtigung, den Google Sitemap-Feed zu ändern!';
