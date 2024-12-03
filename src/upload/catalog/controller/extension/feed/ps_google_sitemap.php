@@ -45,11 +45,14 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
 
         $xml = new \XMLWriter();
         $xml->openMemory();
-        $xml->startDocument('1.0', 'UTF-8');
+        $xml->setIndent(true);
+        $xml->setIndentString("\t");
+        $xml->startDocument('1.0', 'UTF-8', 'yes');
 
         $xml->startElement('urlset');
         $xml->writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
         $xml->writeAttribute('xmlns:image', 'http://www.google.com/schemas/sitemap-image/1.1');
+        $xml->writeAttribute('xmlns:xhtml', 'http://www.w3.org/1999/xhtml');
 
         #region Product
         if ($sitemap_product) {
@@ -69,13 +72,11 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
                 $xml->writeElement('lastmod', date('Y-m-d\TH:i:sP', strtotime($product['date_modified'])));
 
                 if ($sitemap_product_images && $sitemap_max_product_images > 0) {
-                    if (!empty($product['image'])) {
+                    $resized_image = $product['image'] ? $this->model_tool_image->resize(html_entity_decode($product['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height')) : null;
+
+                    if ($resized_image) {
                         $xml->startElement('image:image');
-                        $xml->writeElement('image:loc', $this->model_tool_image->resize(
-                            html_entity_decode($product['image'], ENT_QUOTES, 'UTF-8'),
-                            $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'),
-                            $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height')
-                        ));
+                        $xml->writeElement('image:loc', $resized_image);
                         $xml->endElement();
                     }
 
@@ -84,13 +85,13 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
                         $product_images = array_slice($product_images, 0, $sitemap_max_product_images - 1);
 
                         foreach ($product_images as $product_image) {
-                            $xml->startElement('image:image');
-                            $xml->writeElement('image:loc', $this->model_tool_image->resize(
-                                html_entity_decode($product_image['image'], ENT_QUOTES, 'UTF-8'),
-                                $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'),
-                                $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height')
-                            ));
-                            $xml->endElement();
+                            $resized_image = $product_image['image'] ? $this->model_tool_image->resize(html_entity_decode($product_image['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height')) : null;
+
+                            if ($resized_image) {
+                                $xml->startElement('image:image');
+                                $xml->writeElement('image:loc', $resized_image);
+                                $xml->endElement();
+                            }
                         }
                     }
                 }
@@ -120,14 +121,14 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
                 $manufacturer_url = $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $manufacturer['manufacturer_id']);
                 $xml->writeElement('loc', str_replace('&amp;', '&', $manufacturer_url));
 
-                if ($sitemap_manufacturer_images && !empty($manufacturer['image'])) {
-                    $xml->startElement('image:image');
-                    $xml->writeElement('image:loc', $this->model_tool_image->resize(
-                        html_entity_decode($manufacturer['image'], ENT_QUOTES, 'UTF-8'),
-                        $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'),
-                        $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height')
-                    ));
-                    $xml->endElement();
+                if ($sitemap_manufacturer_images) {
+                    $resized_image = $manufacturer['image'] ? $this->model_tool_image->resize(html_entity_decode($manufacturer['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height')) : null;
+
+                    if ($resized_image) {
+                        $xml->startElement('image:image');
+                        $xml->writeElement('image:loc', $resized_image);
+                        $xml->endElement();
+                    }
                 }
 
                 $xml->endElement();
@@ -159,7 +160,7 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
 
         $this->config->set('config_language_id', $old_language_id);
 
-        $this->response->addHeader('Content-Type: application/xml');
+        $this->response->addHeader('Content-Type: application/xml; charset=utf-8');
         $this->response->setOutput($xml->outputMemory());
 
         unset($xml);
@@ -192,14 +193,14 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
             $xml->writeElement('loc', str_replace('&amp;', '&', $category_url));
             $xml->writeElement('lastmod', date('Y-m-d\TH:i:sP', strtotime($category['date_modified'])));
 
-            if ($sitemap_category_images && !empty($category['image'])) {
-                $xml->startElement('image:image');
-                $xml->writeElement('image:loc', $this->model_tool_image->resize(
-                    html_entity_decode($category['image'], ENT_QUOTES, 'UTF-8'),
-                    $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'),
-                    $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height')
-                ));
-                $xml->endElement();
+            if ($sitemap_category_images) {
+                $resized_image = $category['image'] ? $this->model_tool_image->resize(html_entity_decode($category['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height')) : null;
+
+                if ($resized_image) {
+                    $xml->startElement('image:image');
+                    $xml->writeElement('image:loc', $resized_image);
+                    $xml->endElement();
+                }
             }
 
             $xml->endElement();
