@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']                = 'Playful Sparkle - Google Sitemap';
+$_['heading_robotstxt']            = 'Robots.txt';
 $_['heading_product']              = 'Produkty';
 $_['heading_category']             = 'Kategorie';
 $_['heading_manufacturer']         = 'Výrobci';
@@ -22,7 +23,9 @@ $_['text_setup']                   = '<p><strong>Nastavení Google Sitemap:</str
 $_['text_troubleshot']             = '<ul><li><strong>Rozšíření:</strong> Ujistěte se, že je rozšíření Google Sitemap povoleno v nastaveních OpenCart. Pokud je rozšíření zakázáno, výstup sitemap nebude generován.</li><li><strong>Produkt:</strong> Pokud chybí stránky Produktů ve vaší sitemap, ujistěte se, že jsou povoleny v nastaveních rozšíření a že příslušné produkty mají stav nastaven na „Povoleno“.</li><li><strong>Kategorie:</strong> Pokud se stránky Kategorií nezobrazují, zkontrolujte, zda jsou kategorie povoleny v nastaveních rozšíření a že jejich stav je také nastaven na „Povoleno“.</li><li><strong>Výrobce:</strong> Pro stránky Výrobců ověřte, zda jsou povoleny v nastaveních rozšíření a že výrobci mají stav nastaven na „Povoleno“.</li><li><strong>Informace:</strong> Pokud se stránky Informací nezobrazují v sitemap, ujistěte se, že jsou povoleny v nastaveních rozšíření a že jejich stav je nastaven na „Povoleno“.</li></ul>';
 $_['text_faq']                     = '<details><summary>Jak odeslat svou sitemap do Google Search Console?</summary>V Google Search Console přejděte do <em>Sitemaps</em> v menu, zadejte URL sitemap (typicky /sitemap.xml) a klikněte na <em>Odeslat</em>. Tímto upozorníte Google, aby začal procházet váš web.</details><details><summary>Proč je sitemap důležitá pro SEO?</summary>Sitemap usměrňuje vyhledávače k nejdůležitějším stránkám vašeho webu, což usnadňuje jejich přesné indexování obsahu a může pozitivně ovlivnit umístění ve vyhledávačích.</details><details><summary>Jsou obrázky zahrnuty do sitemap?</summary>Ano, obrázky jsou zahrnuty do generované sitemap tímto rozšířením, což zajišťuje, že vyhledávače mohou indexovat váš vizuální obsah spolu s URL.</details><details><summary>Proč sitemap používá <em>lastmod</em> místo <em>priority</em> a <em>changefreq</em>?</summary>Google nyní ignoruje hodnoty <priority> a <changefreq>, přičemž se zaměřuje na <lastmod> pro čerstvost obsahu. Používání <lastmod> pomáhá prioritizovat nedávné aktualizace.</details>';
 $_['text_contact']                 = '<p>Pro další pomoc se prosím obraťte na náš tým podpory:</p><ul><li><strong>Kontakt:</strong> <a href="mailto:%s">%s</a></li><li><strong>Dokumentace:</strong> <a href="%s" target="_blank" rel="noopener noreferrer">Dokumentace pro uživatele</a></li></ul>';
-$_['text_feed_url_blocked']        = 'URL adresa mapy stránek "%s" je blokována souborem robots.txt.';
+$_['text_user_agent_any']          = 'Jakýkoli uživatelský agent';
+$_['text_allowed']                 = 'Povoleno: %s';
+$_['text_disallowed']              = 'Zakázáno: %s';
 
 // Tab
 $_['tab_general']                  = 'Obecné';
@@ -44,9 +47,12 @@ $_['entry_information']            = 'Informace';
 $_['entry_data_feed_url']          = 'URL datového feedu';
 $_['entry_active_store']           = 'Aktivní obchod';
 $_['entry_htaccess_mod']           = 'Úprava .htaccess';
+$_['entry_validation_results']     = 'Výsledky ověření';
+$_['entry_user_agent']             = 'User-Agent';
 
 // Button
 $_['button_patch_htaccess']        = 'Použít úpravu .htaccess';
+$_['button_validate_robotstxt']    = 'Ověřit pravidla Robots.txt';
 
 // Help
 $_['help_product_images']          = 'Export obrázků produktů může zpočátku zvýšit dobu zpracování (pouze při prvním zpracování obrázků), a velikost souboru XML sitemap se tím zvětší.';

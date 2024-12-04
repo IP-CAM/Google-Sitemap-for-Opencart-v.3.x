@@ -172,14 +172,11 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
         $data['data_feed_seo_urls'] = array();
         $data['data_feed_urls'] = array();
 
-        $feed_seo_urls = array();
         $htaccess_mod = array();
 
         foreach ($languages as $language) {
             $feed_seo_url = rtrim($store_url, '/') . '/' . $language['code'] . '/sitemap.xml';
             $feed_url = rtrim($store_url, '/') . '/index.php?route=extension/feed/ps_google_sitemap&language=' . $language['code'];
-
-            $feed_seo_urls[] = $feed_seo_url;
 
             $data['data_feed_seo_urls'][$language['language_id']] = $feed_seo_url;
             $data['data_feed_urls'][$language['language_id']] = $feed_url;
@@ -189,15 +186,21 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
 
         $data['htaccess_mod'] = implode(PHP_EOL, $htaccess_mod);
 
-        $data['robots_txt_errors'] = [];
-
-        $robotsTxtValidationResult = $this->_validateRobotsTxt($feed_seo_urls);
-
-        foreach ($robotsTxtValidationResult as $feed_seo_url => $result) {
-            if ($result) {
-                $data['robots_txt_errors'][] = sprintf($this->language->get('text_feed_url_blocked'), $feed_seo_url);
-            }
-        }
+        $data['user_agents'] = array(
+            '*' => $this->language->get('text_user_agent_any'),
+            'Googlebot' => 'Googlebot',
+            'Googlebot-Image' => 'Googlebot Image',
+            'Googlebot-Video' => 'Googlebot Video',
+            'Googlebot-News' => 'Googlebot News',
+            'Bingbot' => 'Bingbot',
+            'msnbot' => 'MSNBot',
+            'YandexBot' => 'YandexBot',
+            'YandexImages' => 'YandexImages',
+            'YandexVideo' => 'YandexVideo',
+            'YandexMedia' => 'YandexMedia',
+            'Baiduspider' => 'BaiduSpider',
+            'SeznamBot' => 'SeznamBot',
+        );
 
         $data['text_contact'] = sprintf($this->language->get('text_contact'), self::EXTENSION_EMAIL, self::EXTENSION_EMAIL, self::EXTENSION_DOC);
 
@@ -240,7 +243,7 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
     {
 
     }
-    private function _validateRobotsTxt($urls)
+    private function _validateRobotsTxt($testUserAgent, $urls)
     {
         $results = [];
 
@@ -261,13 +264,12 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
         // Iterate through each URL to check
         foreach ($urls as $url) {
             $parsedUrl = parse_url($url);
-            $path = $parsedUrl['path'];
+            $path = $parsedUrl['path'] . (isset($parsedUrl['query']) ? '?' . $parsedUrl['query'] : '');
 
             // Variables to track user-agent and blocking status
             $userAgent = null;
             $isBlocked = false;
             $disallowedPaths = [];
-            $defaultUserAgentFound = false;
 
             // Check each line in robots.txt
             foreach ($lines as $line) {
@@ -281,18 +283,11 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
                 // Check if it's a User-agent directive
                 if (strpos($line, 'User-agent:') === 0) {
                     $userAgent = trim(substr($line, 11)); // Extract user-agent
-                    $defaultUserAgentFound = false;
                     continue; // Move to the next line
                 }
 
-                // If no user-agent found yet, default to Googlebot
-                if ($userAgent === null && !$defaultUserAgentFound) {
-                    $userAgent = 'Googlebot';
-                    $defaultUserAgentFound = true;
-                }
-
-                // If user-agent is Googlebot or wildcard '*', process the Disallow
-                if ($userAgent === 'Googlebot' || $userAgent === '*') {
+                // If user-agent is test user-agent or wildcard '*', process the Disallow
+                if ($userAgent === $testUserAgent || $userAgent === '*' || $userAgent === null) {
                     if (strpos($line, 'Disallow:') === 0) {
                         $disallowedPath = trim(substr($line, 9)); // Extract disallowed path
                         $disallowedPaths[] = $disallowedPath; // Store disallowed paths
@@ -310,14 +305,11 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
             }
 
             // Store the result for this URL
-            $results[$url] = $isBlocked;
+            $results[$url] = $isBlocked ? 'text_disallowed' : 'text_allowed';
         }
 
         return $results; // Return the array of results for each URL
     }
-
-
-
 
     /**
      * Converts a Disallow pattern to a regular expression
@@ -339,6 +331,63 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
 
         // Make sure the regular expression matches the entire path (not just a part of it)
         return '/^' . $disallowedPath . '/';
+    }
+
+    public function validaterobotstxt()
+    {
+        $this->load->language('extension/feed/ps_google_sitemap');
+
+        $json = [];
+
+        if (!$this->user->hasPermission('modify', 'extension/feed/ps_google_sitemap')) {
+            $json['error'] = $this->language->get('error_permission');
+        }
+
+        $this->load->model('localisation/language');
+
+        if (isset($this->request->get['store_id'])) {
+            $store_id = (int) $this->request->get['store_id'];
+        } else {
+            $store_id = 0;
+        }
+
+        if (isset($this->request->get['user_agent'])) {
+            $user_agent = $this->request->get['user_agent'];
+        } else {
+            $user_agent = '*';
+        }
+
+        $store_url = HTTP_CATALOG;
+
+        if (!$json) {
+
+            $feed_seo_urls = array();
+
+            $languages = $this->model_localisation_language->getLanguages();
+
+            foreach ($languages as $language) {
+                $feed_seo_urls[] = rtrim($store_url, '/') . '/index.php?route=extension/feed/ps_google_sitemap&language=' . $language['code'];
+            }
+
+            foreach ($languages as $language) {
+                $feed_seo_urls[] = rtrim($store_url, '/') . '/' . $language['code'] . '/sitemap.xml';
+            }
+
+            $results = array();
+
+            $validationResults = $this->_validateRobotsTxt($user_agent, $feed_seo_urls);
+
+            foreach ($validationResults as $feed_seo_url => $translation) {
+                $results[] = sprintf($this->language->get($translation), $feed_seo_url);
+            }
+
+            $json['results'] = implode(PHP_EOL, $results);
+        } else {
+            $json['results'] = '';
+        }
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
     }
 
     private function _patchHtaccess()

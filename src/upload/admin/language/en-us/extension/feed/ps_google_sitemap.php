@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']                = 'Playful Sparkle - Google Sitemap';
+$_['heading_robotstxt']            = 'Robots.txt';
 $_['heading_product']              = 'Products';
 $_['heading_category']             = 'Categories';
 $_['heading_manufacturer']         = 'Manufacturers';
@@ -22,7 +23,9 @@ $_['text_setup']                   = '<p><strong>Setting Up Google Sitemap:</str
 $_['text_troubleshot']             = '<ul><li><strong>Extension:</strong> Ensure that the Google Sitemap extension is enabled in your OpenCart settings. If the extension is disabled, the sitemap output will not be generated.</li><li><strong>Product:</strong> If Product pages are missing from your sitemap, ensure they are enabled in the extension settings and that the relevant products have their status set to “Enabled.”</li><li><strong>Category:</strong> If Category pages are not appearing, check that the categories are enabled in the extension settings and that their status is also set to “Enabled.”</li><li><strong>Manufacturer:</strong> For Manufacturer pages, verify that they are enabled in the extension settings and that the manufacturers have their status set to “Enabled.”</li><li><strong>Information:</strong> If Information pages are not showing in the sitemap, make sure they are enabled in the extension settings and that their status is set to “Enabled.”</li></ul>';
 $_['text_faq']                     = '<details><summary>How do I submit my sitemap to Google Search Console?</summary>In Google Search Console, go to <em>Sitemaps</em> in the menu, enter the sitemap URL (typically /sitemap.xml), and click <em>Submit</em>. This will notify Google to start crawling your site.</details><details><summary>Why is a sitemap important for SEO?</summary>A sitemap guides search engines to your site’s most important pages, making it easier for them to index your content accurately, which can positively impact search rankings.</details><details><summary>Are images included in the sitemap?</summary>Yes, images are included in the generated sitemap by this extension, ensuring that search engines can index your visual content along with the url.</details><details><summary>Why does the sitemap use <em>lastmod</em> instead of <em>priority</em> and <em>changefreq</em>?</summary>Google now ignores <priority> and <changefreq> values, focusing instead on <lastmod> for content freshness. Using <lastmod> helps prioritize recent updates.</details>';
 $_['text_contact']                 = '<p>For further assistance, please reach out to our support team:</p><ul><li><strong>Contact:</strong> <a href="mailto:%s">%s</a></li><li><strong>Documentation:</strong> <a href="%s" target="_blank" rel="noopener noreferrer">User Documentation</a></li></ul>';
-$_['text_feed_url_blocked']        = 'The feed URL "%s" is blocked by the robots.txt file.';
+$_['text_user_agent_any']          = 'Any User Agent';
+$_['text_allowed']                 = 'Allowed: %s';
+$_['text_disallowed']              = 'Disallowed: %s';
 
 // Tab
 $_['tab_general']                  = 'General';
@@ -43,9 +46,12 @@ $_['entry_information']            = 'Information';
 $_['entry_data_feed_url']          = 'Data Feed URL';
 $_['entry_active_store']           = 'Active Store';
 $_['entry_htaccess_mod']           = '.htaccess Modification';
+$_['entry_validation_results']     = 'Validation results';
+$_['entry_user_agent']             = 'User-Agent';
 
 // Button
 $_['button_patch_htaccess']        = 'Patch .htaccess';
+$_['button_validate_robotstxt']    = 'Validate Robots.txt Rules';
 
 // Help
 $_['help_product_images']          = 'Exporting product images may increase processing time initially (only when images are processed for the first time), and the XML sitemap file size will be larger as a result.';

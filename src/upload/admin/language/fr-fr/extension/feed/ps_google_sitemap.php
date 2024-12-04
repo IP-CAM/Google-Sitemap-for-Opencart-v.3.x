@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']                = 'Playful Sparkle - Google Sitemap';
+$_['heading_robotstxt']            = 'Robots.txt';
 $_['heading_product']              = 'Produits';
 $_['heading_category']             = 'Catégories';
 $_['heading_manufacturer']         = 'Fabricants';
@@ -22,7 +23,9 @@ $_['text_setup']                   = '<p><strong>Configuration de Google Sitemap
 $_['text_troubleshot']             = '<ul><li><strong>Extension :</strong> Assurez-vous que l\'extension Google Sitemap est activée dans les paramètres de votre OpenCart. Si l\'extension est désactivée, le sitemap ne sera pas généré.</li><li><strong>Produit :</strong> Si les pages Produits sont manquantes dans votre sitemap, assurez-vous qu\'elles sont activées dans les paramètres de l\'extension et que les produits concernés sont définis comme "Activés".</li><li><strong>Catégorie :</strong> Si les pages Catégories n\'apparaissent pas, vérifiez que les catégories sont activées dans les paramètres de l\'extension et que leur statut est également défini sur "Activé".</li><li><strong>Fabricant :</strong> Pour les pages Fabricant, vérifiez qu\'elles sont activées dans les paramètres de l\'extension et que les fabricants ont leur statut défini sur "Activé".</li><li><strong>Information :</strong> Si les pages d\'Information ne sont pas affichées dans le sitemap, assurez-vous qu\'elles sont activées dans les paramètres de l\'extension et que leur statut est défini sur "Activé".</li></ul>';
 $_['text_faq']                     = '<details><summary>Comment soumettre mon sitemap à Google Search Console ?</summary>Dans Google Search Console, allez dans <em>Sitemaps</em> dans le menu, entrez l\'URL du sitemap (généralement /sitemap.xml) et cliquez sur <em>Soumettre</em>. Cela avertira Google de commencer à explorer votre site.</details><details><summary>Pourquoi un sitemap est-il important pour le SEO ?</summary>Un sitemap aide les moteurs de recherche à trouver les pages les plus importantes de votre site, facilitant ainsi leur indexation correcte, ce qui peut améliorer le classement dans les résultats de recherche.</details><details><summary>Les images sont-elles incluses dans le sitemap ?</summary>Oui, les images sont incluses dans le sitemap généré par cette extension, permettant aux moteurs de recherche d\'indexer votre contenu visuel avec l\'URL.</details><details><summary>Pourquoi le sitemap utilise-t-il <em>lastmod</em> au lieu de <em>priority</em> et <em>changefreq</em> ?</summary>Google ignore désormais les valeurs <priority> et <changefreq>, se concentrant plutôt sur <lastmod> pour refléter la fraîcheur du contenu. L\'utilisation de <lastmod> aide à prioriser les mises à jour récentes.</details>';
 $_['text_contact']                 = '<p>Pour toute assistance supplémentaire, veuillez contacter notre équipe de support :</p><ul><li><strong>Contact :</strong> <a href="mailto:%s">%s</a></li><li><strong>Documentation :</strong> <a href="%s" target="_blank" rel="noopener noreferrer">Documentation utilisateur</a></li></ul>';
-$_['text_feed_url_blocked']        = 'L’URL du sitemap "%s" est bloquée par le fichier robots.txt.';
+$_['text_user_agent_any']          = 'Tout agent utilisateur';
+$_['text_allowed']                 = 'Autorisé : %s';
+$_['text_disallowed']              = 'Interdit : %s';
 
 // Tab
 $_['tab_general']                  = 'Général';
@@ -43,9 +46,12 @@ $_['entry_information']            = 'Information';
 $_['entry_data_feed_url']          = 'URL du flux de données';
 $_['entry_active_store']           = 'Magasin actif';
 $_['entry_htaccess_mod']           = 'Modification de .htaccess';
+$_['entry_validation_results']     = 'Résultats de la validation';
+$_['entry_user_agent']             = 'Agent utilisateur';
 
 // Button
 $_['button_patch_htaccess']        = 'Appliquer la modification à .htaccess';
+$_['button_validate_robotstxt']    = 'Valider les règles Robots.txt';
 
 // Help
 $_['help_product_images']          = 'L’exportation des images de produits peut augmenter le temps de traitement au début (seulement lors du premier traitement des images), et la taille du fichier sitemap XML sera plus grande en conséquence.';

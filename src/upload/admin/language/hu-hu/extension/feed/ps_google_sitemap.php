@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']                = 'Playful Sparkle - Google Oldaltérkép';
+$_['heading_robotstxt']            = 'Robots.txt';
 $_['heading_product']              = 'Termékek';
 $_['heading_category']             = 'Kategóriák';
 $_['heading_manufacturer']         = 'Gyártók';
@@ -22,7 +23,9 @@ $_['text_setup']                   = '<p><strong>A Google Sitemap beállítása:
 $_['text_troubleshot']             = '<ul><li><strong>Kiegészítő:</strong> Győződjön meg arról, hogy a Google Sitemap kiegészítő engedélyezve van az OpenCart beállításokban. Ha a kiegészítő le van tiltva, a térkép kimenete nem lesz generálva.</li><li><strong>Termék:</strong> Ha a Termék oldalak hiányoznak a térképből, győződjön meg arról, hogy engedélyezve vannak a kiegészítő beállításaiban, és hogy a megfelelő termékek állapota "Engedélyezett".</li><li><strong>Kategória:</strong> Ha a Kategória oldalak nem jelennek meg, ellenőrizze, hogy a kategóriák engedélyezve vannak-e a kiegészítő beállításaiban, és hogy azok állapota is "Engedélyezett".</li><li><strong>Gyártó:</strong> A Gyártó oldalak esetében ellenőrizze, hogy azok engedélyezve vannak a kiegészítő beállításaiban, és hogy a gyártók állapota "Engedélyezett".</li><li><strong>Információ:</strong> Ha az Információs oldalak nem jelennek meg a térképen, győződjön meg arról, hogy engedélyezve vannak a kiegészítő beállításaiban, és hogy az állapotuk "Engedélyezett".</li></ul>';
 $_['text_faq']                     = '<details><summary>Hogyan küldhetem el a sitemap-et a Google Search Console-ba?</summary>A Google Search Console-ban lépjen a menü <em>Sitemaps</em> részébe, adja meg a sitemap URL-jét (jellemzően /sitemap.xml), majd kattintson az <em>Elküldés</em> gombra. Ezzel értesíti a Google-t, hogy kezdje el a webhelyének bejárását.</details><details><summary>Miért fontos a sitemap a SEO szempontjából?</summary>A sitemap útmutatja a keresőmotorokat a webhely legfontosabb oldalaihoz, megkönnyítve ezáltal a tartalom pontos indexelését, ami pozitívan befolyásolhatja a keresési rangsorolást.</details><details><summary>Az képek szerepelnek a sitemap-ban?</summary>Igen, a képek szerepelnek a generált sitemap-ban, amelyet ez a bővítmény biztosít, biztosítva ezzel, hogy a keresőmotorok indexálhassák a vizuális tartalmát az URL-el együtt.</details><details><summary>Miért használ a sitemap <em>lastmod</em>-ot <em>priority</em> és <em>changefreq</em> helyett?</summary>A Google mostantól figyelmen kívül hagyja a <priority> és <changefreq> értékeket, ehelyett a tartalom frissességére összpontosítva a <lastmod>-ot. A <lastmod> használata segít prioritizálni a legutóbbi frissítéseket.</details>';
 $_['text_contact']                 = '<p>További segítségért kérjük, lépjen kapcsolatba támogatási csapatunkkal:</p><ul><li><strong>Kapcsolat:</strong> <a href="mailto:%s">%s</a></li><li><strong>Dokumentáció:</strong> <a href="%s" target="_blank" rel="noopener noreferrer">Felhasználói dokumentáció</a></li></ul>';
-$_['text_feed_url_blocked']        = 'A webhelytérkép URL-je ("%s") le van tiltva a robots.txt fájl által.';
+$_['text_user_agent_any']          = 'Bármely felhasználói ügynök';
+$_['text_allowed']                 = 'Engedélyezett: %s';
+$_['text_disallowed']              = 'Tiltott: %s';
 
 // Tab
 $_['tab_general']                  = 'Általános';
@@ -43,9 +46,12 @@ $_['entry_information']            = 'Információ';
 $_['entry_data_feed_url']          = 'Adatfolyam URL';
 $_['entry_active_store']           = 'Aktív áruház';
 $_['entry_htaccess_mod']           = '.htaccess módosítása';
+$_['entry_validation_results']     = 'Érvényesítés eredményei';
+$_['entry_user_agent']             = 'User-Agent';
 
 // Button
 $_['button_patch_htaccess']        = '.htaccess módosítása';
+$_['button_validate_robotstxt']    = 'Robots.txt szabályok érvényesítése';
 
 // Help
 $_['help_product_images']          = 'A termékképek exportálása kezdetben megnövelheti a folyamat idejét (csak az első képfeldolgozásnál), és ennek eredményeként az XML webhelytérkép fájlmérete is nagyobb lesz.';

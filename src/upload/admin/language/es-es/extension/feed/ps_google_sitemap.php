@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']                = 'Playful Sparkle - Google Sitemap';
+$_['heading_robotstxt']            = 'Robots.txt';
 $_['heading_product']              = 'Productos';
 $_['heading_category']             = 'Categorías';
 $_['heading_manufacturer']         = 'Fabricantes';
@@ -21,6 +22,9 @@ $_['text_setup']                   = '<p><strong>Configuración del Google Sitem
 $_['text_troubleshot']             = '<ul><li><strong>Extensión:</strong> Asegúrate de que la extensión Google Sitemap esté habilitada en la configuración de OpenCart. Si la extensión está desactivada, no se generará la salida del mapa de sitio.</li><li><strong>Producto:</strong> Si las páginas de Producto no aparecen en tu mapa de sitio, asegúrate de que estén habilitadas en la configuración de la extensión y que los productos relevantes tengan su estado establecido como "Habilitado".</li><li><strong>Categoría:</strong> Si las páginas de Categoría no aparecen, verifica que las categorías estén habilitadas en la configuración de la extensión y que su estado también esté configurado como "Habilitado".</li><li><strong>Fabricante:</strong> Para las páginas de Fabricante, asegúrate de que estén habilitadas en la configuración de la extensión y que los fabricantes tengan su estado configurado como "Habilitado".</li><li><strong>Información:</strong> Si las páginas de Información no se muestran en el mapa de sitio, asegúrate de que estén habilitadas en la configuración de la extensión y que su estado esté configurado como "Habilitado".</li></ul>';
 $_['text_faq']                     = '<details><summary>¿Cómo envío mi mapa de sitio a Google Search Console?</summary>En Google Search Console, ve a <em>Mapas de sitio</em> en el menú, introduce la URL del mapa de sitio (generalmente /sitemap.xml) y haz clic en <em>Enviar</em>. Esto notificará a Google que empiece a rastrear tu sitio.</details><details><summary>¿Por qué es importante un mapa de sitio para SEO?</summary>Un mapa de sitio guía a los motores de búsqueda a las páginas más importantes de tu sitio, facilitando la indexación precisa de tu contenido, lo cual puede impactar positivamente en el ranking de búsqueda.</details><details><summary>¿Las imágenes están incluidas en el mapa de sitio?</summary>Sí, las imágenes están incluidas en el mapa de sitio generado por esta extensión, asegurando que los motores de búsqueda puedan indexar tu contenido visual junto con la URL.</details><details><summary>¿Por qué el mapa de sitio utiliza <em>lastmod</em> en lugar de <em>priority</em> y <em>changefreq</em>?</summary>Google ahora ignora los valores <priority> y <changefreq>, enfocándose en <lastmod> para la frescura del contenido. Usar <lastmod> ayuda a priorizar las actualizaciones recientes.</details>';
 $_['text_contact']                 = '<p>Para más asistencia, póngase en contacto con nuestro equipo de soporte:</p><ul><li><strong>Contacto:</strong> <a href="mailto:%s">%s</a></li><li><strong>Documentación:</strong> <a href="%s" target="_blank" rel="noopener noreferrer">Documentación para el usuario</a></li></ul>';
+$_['text_user_agent_any']          = 'Cualquier agente de usuario';
+$_['text_allowed']                 = 'Permitido: %s';
+$_['text_disallowed']              = 'Prohibido: %s';
 
 // Tab
 $_['tab_general']                  = 'General';
@@ -41,9 +45,12 @@ $_['entry_information']            = 'Información';
 $_['entry_data_feed_url']          = 'URL del feed de datos';
 $_['entry_active_store']           = 'Tienda activa';
 $_['entry_htaccess_mod']           = 'Modificación de .htaccess';
+$_['entry_validation_results']     = 'Resultados de la validación';
+$_['entry_user_agent']             = 'Agente de usuario';
 
 // Button
 $_['button_patch_htaccess']        = 'Aplicar modificación a .htaccess';
+$_['button_validate_robotstxt']    = 'Validar las reglas de Robots.txt';
 
 // Help
 $_['help_product_images']          = 'La exportación de imágenes de productos puede aumentar el tiempo de procesamiento inicialmente (solo cuando las imágenes se procesan por primera vez), y el tamaño del archivo XML sitemap será mayor como resultado.';

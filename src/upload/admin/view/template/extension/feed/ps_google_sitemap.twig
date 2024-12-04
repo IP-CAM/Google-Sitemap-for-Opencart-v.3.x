@@ -27,9 +27,6 @@
 		</div>
 	</div>
   <div class="container-fluid">
-    {% for robots_txt_error in robots_txt_errors %}
-    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ robots_txt_error }}</div>
-    {% endfor %}
     {% if error_warning %}
     <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
       <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -196,6 +193,32 @@
 
 							</fieldset>
 
+							<fieldset>
+								<legend>{{ heading_robotstxt }}</legend>
+
+								<div class="form-group">
+									<label for="input-user-agent" class="col-sm-2 control-label">{{ entry_user_agent }}</label>
+									<div class="col-sm-10">
+										<select id="input-user-agent" class="form-control">
+											{% for key, value in user_agents %}
+												<option value="{{ key }}">{{ value }}</option>
+											{% endfor %}
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="input-validation-results">{{ entry_validation_results }}</label>
+									<div class="col-sm-10">
+										<textarea rows="6" id="input-validation-results" class="form-control" readonly></textarea>
+									</div>
+									<div class="col-sm-offset-2 col-sm-12">
+										<button type="button" id="ps-validate-robotstxt" data-toggle="tooltip" title="{{ button_validate_robotstxt }}" class="btn btn-info"><i class="fa fa-file"></i> {{ button_validate_robotstxt }}</button>
+									</div>
+								</div>
+
+							</fieldset>
+
 							<ul class="nav nav-tabs">
 								<li class="active"><a href="#tab-data-feed-url" data-toggle="tab">{{ tab_data_feed_url }}</a></li>
 								<li><a href="#tab-data-feed-seo-url" data-toggle="tab">{{ tab_data_feed_seo_url }}</a></li>
@@ -310,6 +333,41 @@
 			if (linkUrl.length) {
 					window.open(linkUrl, '_blank');
 			}
+		});
+
+		$('#input-validate-robotstxt').on('change', function () {
+			$('#input-user-agent').prop('disabled', $(this).prop('selectedIndex'));
+			$('#ps-validate-robotstxt').prop('disabled', $(this).prop('selectedIndex'));
+		});
+
+		$('#ps-validate-robotstxt').on('click', function() {
+			var $this = $(this);
+			var action = $(this).data('fix-action');
+
+			$.ajax({
+			  url: 'index.php?route=extension/feed/ps_google_sitemap/validaterobotstxt&user_token={{ user_token }}&store_id={{ store_id}}&user_agent=' + $('#input-user-agent option:selected').val(),
+			  dataType: 'json',
+				beforeSend: function () {
+					$($this).button('loading');
+				},
+				complete: function () {
+					$($this).button('reset');
+				},
+				success: function (json) {
+					$('.alert-dismissible').remove();
+
+					if (json['error']) {
+						$('.panel-default').before('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+					}
+
+					if (json['results']) {
+						$('#input-validation-results').text(json['results']);
+					}
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+				}
+			});
 		});
 
 		$('#ps-patch-htaccess').on('click', function() {

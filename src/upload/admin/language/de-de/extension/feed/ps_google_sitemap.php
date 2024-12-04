@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']                = 'Playful Sparkle - Google Sitemap';
+$_['heading_robotstxt']            = 'Robots.txt';
 $_['heading_product']              = 'Produkte';
 $_['heading_category']             = 'Kategorien';
 $_['heading_manufacturer']         = 'Hersteller';
@@ -22,7 +23,9 @@ $_['text_setup']                   = '<p><strong>Einrichten der Google Sitemap:<
 $_['text_troubleshot']             = '<ul><li><strong>Erweiterung:</strong> Stellen Sie sicher, dass die Google Sitemap-Erweiterung in Ihren OpenCart-Einstellungen aktiviert ist. Wenn die Erweiterung deaktiviert ist, wird die Sitemap nicht generiert.</li><li><strong>Produkt:</strong> Wenn Produktseiten in Ihrer Sitemap fehlen, stellen Sie sicher, dass sie in den Erweiterungseinstellungen aktiviert sind und dass der Status der relevanten Produkte auf "Aktiv" gesetzt ist.</li><li><strong>Kategorie:</strong> Wenn Kategorie-Seiten nicht angezeigt werden, überprüfen Sie, ob die Kategorien in den Erweiterungseinstellungen aktiviert sind und ob ihr Status ebenfalls auf "Aktiv" gesetzt ist.</li><li><strong>Hersteller:</strong> Überprüfen Sie für Herstellerseiten, ob sie in den Erweiterungseinstellungen aktiviert sind und ob die Hersteller ihren Status auf "Aktiv" gesetzt haben.</li><li><strong>Information:</strong> Wenn Informationsseiten in der Sitemap nicht angezeigt werden, stellen Sie sicher, dass sie in den Erweiterungseinstellungen aktiviert sind und dass ihr Status auf "Aktiv" gesetzt ist.</li></ul>';
 $_['text_faq']                     = '<details><summary>Wie reiche ich meine Sitemap bei der Google Search Console ein?</summary>Gehen Sie in der Google Search Console zu <em>Sitemaps</em> im Menü, geben Sie die URL der Sitemap ein (typischerweise /sitemap.xml) und klicken Sie auf <em>Einreichen</em>. Damit benachrichtigen Sie Google, Ihre Website zu crawlen.</details><details><summary>Warum ist eine Sitemap wichtig für SEO?</summary>Eine Sitemap leitet Suchmaschinen zu den wichtigsten Seiten Ihrer Website, was es ihnen erleichtert, Ihre Inhalte genau zu indexieren, was sich positiv auf die Suchrankings auswirken kann.</details><details><summary>Sind Bilder in der Sitemap enthalten?</summary>Ja, Bilder sind in der von dieser Erweiterung generierten Sitemap enthalten, sodass Suchmaschinen Ihren visuellen Inhalt zusammen mit der URL indexieren können.</details><details><summary>Warum verwendet die Sitemap <em>lastmod</em> anstelle von <em>priority</em> und <em>changefreq</em>?</summary>Google ignoriert jetzt die Werte <priority> und <changefreq> und konzentriert sich stattdessen auf <lastmod> für die Frische des Inhalts. Die Verwendung von <lastmod> hilft, kürzliche Aktualisierungen zu priorisieren.</details>';
 $_['text_contact']                 = '<p>Für weitere Unterstützung wenden Sie sich bitte an unser Support-Team:</p><ul><li><strong>Kontakt:</strong> <a href="mailto:%s">%s</a></li><li><strong>Dokumentation:</strong> <a href="%s" target="_blank" rel="noopener noreferrer">Benutzerdokumentation</a></li></ul>';
-$_['text_feed_url_blocked']        = 'Die Sitemap-URL "%s" wird durch die robots.txt-Datei blockiert.';
+$_['text_user_agent_any']          = 'Jeder Benutzeragent';
+$_['text_allowed']                 = 'Erlaubt: %s';
+$_['text_disallowed']              = 'Verboten: %s';
 
 // Tab
 $_['tab_general']                  = 'Allgemein';
@@ -43,9 +46,12 @@ $_['entry_information']            = 'Information';
 $_['entry_data_feed_url']          = 'Datenfeed-URL';
 $_['entry_active_store']           = 'Aktiver Shop';
 $_['entry_htaccess_mod']           = '.htaccess-Modifikation';
+$_['entry_validation_results']     = 'Validierungsergebnisse';
+$_['entry_user_agent']             = 'User-Agent';
 
 // Button
 $_['button_patch_htaccess']        = 'Änderungen an .htaccess anwenden';
+$_['button_validate_robotstxt']    = 'Robots.txt-Regeln überprüfen';
 
 // Help
 $_['help_product_images']          = 'Das Exportieren von Produktbildern kann anfänglich die Verarbeitungszeit erhöhen (nur beim ersten Verarbeiten der Bilder), und die XML-Sitemap-Datei wird dadurch größer.';
