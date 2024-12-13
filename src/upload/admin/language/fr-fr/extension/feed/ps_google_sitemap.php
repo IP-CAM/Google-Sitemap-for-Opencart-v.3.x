@@ -54,6 +54,8 @@ $_['button_patch_htaccess']        = 'Appliquer la modification à .htaccess';
 $_['button_validate_robotstxt']    = 'Valider les règles Robots.txt';
 
 // Help
+$_['help_copy']                    = 'Copier l\'URL';
+$_['help_open']                    = 'Ouvrir l\'URL';
 $_['help_product_images']          = 'L’exportation des images de produits peut augmenter le temps de traitement au début (seulement lors du premier traitement des images), et la taille du fichier sitemap XML sera plus grande en conséquence.';
 $_['help_htaccess_mod']            = 'L\'URL du flux de données optimisée pour le SEO nécessite une modification de votre fichier .htaccess. Vous pouvez ajouter le code requis manuellement en le copiant et en le collant dans votre fichier .htaccess, ou simplement cliquer sur le bouton orange « Patch .htaccess » pour appliquer les modifications automatiquement.';
 

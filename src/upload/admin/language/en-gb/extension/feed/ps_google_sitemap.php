@@ -54,6 +54,8 @@ $_['button_patch_htaccess']        = 'Patch .htaccess';
 $_['button_validate_robotstxt']    = 'Validate Robots.txt Rules';
 
 // Help
+$_['help_copy']                    = 'Copy URL';
+$_['help_open']                    = 'Open URL';
 $_['help_product_images']          = 'Exporting product images may increase processing time initially (only when images are processed for the first time), and the XML sitemap file size will be larger as a result.';
 $_['help_htaccess_mod']            = 'The SEO-friendly data feed URL requires modification of your .htaccess file. You can manually add the required code by copying and pasting it into your .htaccess file, or simply click on the orange "Patch .htaccess" button to apply the changes automatically.';
 

@@ -54,6 +54,8 @@ $_['button_patch_htaccess']        = 'Änderungen an .htaccess anwenden';
 $_['button_validate_robotstxt']    = 'Robots.txt-Regeln überprüfen';
 
 // Help
+$_['help_copy']                    = 'URL kopieren';
+$_['help_open']                    = 'URL öffnen';
 $_['help_product_images']          = 'Das Exportieren von Produktbildern kann anfänglich die Verarbeitungszeit erhöhen (nur beim ersten Verarbeiten der Bilder), und die XML-Sitemap-Datei wird dadurch größer.';
 $_['help_htaccess_mod']            = 'Die SEO-freundliche URL des Datenfeeds erfordert eine Modifikation der .htaccess-Datei. Sie können den erforderlichen Code manuell hinzufügen, indem Sie ihn kopieren und in die .htaccess-Datei einfügen, oder einfach auf die orangefarbene Schaltfläche „Patch .htaccess“ klicken, um die Änderungen automatisch anzuwenden.';
 

@@ -54,6 +54,8 @@ $_['button_patch_htaccess']        = '.htaccess módosítása';
 $_['button_validate_robotstxt']    = 'Robots.txt szabályok érvényesítése';
 
 // Help
+$_['help_copy']                    = 'URL másolása';
+$_['help_open']                    = 'URL megnyitása';
 $_['help_product_images']          = 'A termékképek exportálása kezdetben megnövelheti a folyamat idejét (csak az első képfeldolgozásnál), és ennek eredményeként az XML webhelytérkép fájlmérete is nagyobb lesz.';
 $_['help_htaccess_mod']            = 'A SEO-barát adatfolyam URL-je módosítást igényel a .htaccess fájlban. A szükséges kódot manuálisan is hozzáadhatja a .htaccess fájlhoz másolással és beillesztéssel, vagy egyszerűen kattintson a narancssárga „Patch .htaccess” gombra a módosítások automatikus alkalmazásához.';
 

@@ -54,6 +54,8 @@ $_['button_patch_htaccess']        = 'Použiť úpravy .htaccess';
 $_['button_validate_robotstxt']    = 'Overiť pravidlá Robots.txt';
 
 // Help
+$_['help_copy']                    = 'Skopírovať URL';
+$_['help_open']                    = 'Otvoriť URL';
 $_['help_product_images']          = 'Exportovanie obrázkov produktov môže na začiatku zvýšiť čas spracovania (iba pri prvom spracovaní obrázkov), a veľkosť súboru XML mapy stránky sa tým zväčší.';
 $_['help_htaccess_mod']            = 'SEO-priateľská URL dátového feedu vyžaduje úpravu súboru .htaccess. Kód môžete pridať manuálne skopírovaním a vložením do súboru .htaccess, alebo jednoducho kliknite na oranžové tlačidlo „Patch .htaccess“ pre automatické vykonanie zmien.';
 
