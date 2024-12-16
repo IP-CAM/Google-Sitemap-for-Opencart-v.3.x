@@ -372,7 +372,6 @@
 
 		$('#ps-patch-htaccess').on('click', function() {
 			var $this = $(this);
-			var action = $(this).data('fix-action');
 
 			$.ajax({
 			  url: 'index.php?route=extension/feed/ps_google_sitemap/patchhtaccess&user_token={{ user_token }}',
