@@ -179,7 +179,7 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
      *
      * @return void
      */
-    protected function getCategories($xml, $sitemap_category_images, $parent_id)
+    protected function getCategories($xml, $sitemap_category_images, $parent_id, $parent_path = array())
     {
         $categories = $this->model_catalog_category->getCategories($parent_id);
 
@@ -189,7 +189,11 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
             }
 
             $xml->startElement('url');
-            $category_url = $this->url->link('product/category', 'path=' . $category['category_id']);
+
+            $category_path = array_merge($parent_path, [$category['category_id']]);
+
+            $category_url = $this->url->link('product/category', 'path=' . implode('_', $category_path));
+
             $xml->writeElement('loc', str_replace('&amp;', '&', $category_url));
             $xml->writeElement('lastmod', date('Y-m-d\TH:i:sP', strtotime($category['date_modified'])));
 
@@ -205,7 +209,7 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
 
             $xml->endElement();
 
-            $this->getCategories($xml, $sitemap_category_images, $category['category_id']);
+            $this->getCategories($xml, $sitemap_category_images, $category['category_id'], $category_path);
         }
     }
 }
