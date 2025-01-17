@@ -20,6 +20,7 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
         $this->load->model('tool/image');
         $this->load->model('setting/setting');
         $this->load->model('localisation/language');
+        $this->load->model('extension/feed/ps_google_sitemap');
 
         $languages = $this->model_localisation_language->getLanguages();
 
@@ -56,16 +57,10 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
 
         #region Product
         if ($sitemap_product) {
-            $this->load->model('catalog/product');
-
             // Fetch products in chunks to handle large datasets
-            $products = $this->model_catalog_product->getProducts();
+            $products = $this->model_extension_feed_ps_google_sitemap->getProducts();
 
             foreach ($products as $product) {
-                if (0 === (int) $product['status']) {
-                    continue;
-                }
-
                 $xml->startElement('url');
                 $product_url = $this->url->link('product/product', 'product_id=' . $product['product_id']);
                 $xml->writeElement('loc', str_replace('&amp;', '&', $product_url));
@@ -81,7 +76,7 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
                     }
 
                     if ($sitemap_max_product_images > 1) {
-                        $product_images = $this->model_catalog_product->getProductImages($product['product_id']);
+                        $product_images = $this->model_extension_feed_ps_google_sitemap->getProductImages($product['product_id']);
                         $product_images = array_slice($product_images, 0, $sitemap_max_product_images - 1);
 
                         foreach ($product_images as $product_image) {
@@ -104,17 +99,13 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
 
         #region Category
         if ($sitemap_category) {
-            $this->load->model('catalog/category');
-
             $this->getCategories($xml, $sitemap_category_images, 0);
         }
         #endregion
 
         #region Manufacturer
         if ($sitemap_manufacturer) {
-            $this->load->model('catalog/manufacturer');
-
-            $manufacturers = $this->model_catalog_manufacturer->getManufacturers();
+            $manufacturers = $this->model_extension_feed_ps_google_sitemap->getManufacturers();
 
             foreach ($manufacturers as $manufacturer) {
                 $xml->startElement('url');
@@ -138,15 +129,9 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
 
         #region Information
         if ($sitemap_information) {
-            $this->load->model('catalog/information');
-
-            $informations = $this->model_catalog_information->getInformations();
+            $informations = $this->model_extension_feed_ps_google_sitemap->getInformations();
 
             foreach ($informations as $information) {
-                if (0 === (int) $information['status']) {
-                    continue;
-                }
-
                 $xml->startElement('url');
                 $information_url = $this->url->link('information/information', 'information_id=' . $information['information_id']);
                 $xml->writeElement('loc', str_replace('&amp;', '&', $information_url));
@@ -181,13 +166,9 @@ class ControllerExtensionFeedPSGoogleSitemap extends Controller
      */
     protected function getCategories($xml, $sitemap_category_images, $parent_id, $parent_path = array())
     {
-        $categories = $this->model_catalog_category->getCategories($parent_id);
+        $categories = $this->model_extension_feed_ps_google_sitemap->getCategories($parent_id);
 
         foreach ($categories as $category) {
-            if (0 === (int) $category['status']) {
-                continue;
-            }
-
             $xml->startElement('url');
 
             $category_path = array_merge($parent_path, [$category['category_id']]);
