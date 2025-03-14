@@ -20,7 +20,7 @@ With multi-store and multi-language support, the extension allows merchants to c
 - **Compatible with Webmaster Tools**: Fully compatible with commonly used webmaster tools such as Google Search Console, Bing Webmaster Tools, and Yandex Webmaster Tools.
 - **Compatibility**: Integrates smoothly with OpenCart 3.x+, supporting a range of online store setups.
 - **Multi-store Support**: Supports multi-store setups by default, making it easy to integrate across multiple OpenCart stores.
-- **Multilingual Support**: Ready for international use with languages including Čeština (cs-cz), Deutsch (de-de), English (GB) (en-gb), English (US) (en-us), Español (es-es), Français (fr-fr), Magyar (hu-hu), Italiano (it-it), Русский (ru-ru), Slovenčina (sk-sk), and فارسی (fa-ir).
+- **Multilingual Support**: Ready for international use with languages including Čeština (cs-cz), Deutsch (de-de), English (GB) (en-gb), English (US) (en-us), Español (es-es), Français (fr-fr), Magyar (hu-hu), Italiano (it-it), Русский (ru-ru), Ελληνικά (el-GR), العربية (ar), Polski (pl-pl), Slovenčina (sk-sk), and فارسی (fa-ir).
 
 ---
 
